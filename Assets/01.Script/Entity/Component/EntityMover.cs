@@ -1,7 +1,7 @@
 using UnityEngine;
 using MGMG.StatSystem;
 
-namespace MGMG.Entity.Component
+namespace MGMG.Entities.Component
 {
     public class EntityMover : MonoBehaviour, IEntityComponent, IAfterInitable
     {
@@ -26,13 +26,14 @@ namespace MGMG.Entity.Component
         {
             _entity = entity;
             _rbCompo = entity.GetComponent<Rigidbody2D>();
-            _renderer = entity.GetCompo<EntityRenderer>();
             _collider = entity.GetComponent<Collider2D>();
+            _renderer = entity.GetCompo<EntityRenderer>();
             _statCompo = entity.GetCompo<EntityStat>();
         }
 
         public void AfterInit()
         {
+            
             _speedStat = _statCompo.StatDictionary[moveSpeedSO];
         }
 
@@ -57,7 +58,10 @@ namespace MGMG.Entity.Component
         private void MoveCharacter()
         {
             if (CanManualMove)
-                _rbCompo.linearVelocity = _movement * _speedStat.Value;
+            {
+                _rbCompo.linearVelocity = _movement * 10;
+                Debug.Log(_speedStat.Value);
+            }
         }
 
         public void Dispose()

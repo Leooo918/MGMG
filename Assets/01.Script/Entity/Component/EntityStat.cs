@@ -2,7 +2,7 @@ using MGMG.StatSystem;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace MGMG.Entity.Component
+namespace MGMG.Entities.Component
 {
     public class EntityStat : MonoBehaviour,IEntityComponent
     {

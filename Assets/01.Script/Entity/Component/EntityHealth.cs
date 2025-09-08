@@ -1,114 +1,117 @@
-using MGMG.Entity;
-using MGMG.Entity.Component;
 using MGMG.StatSystem;
 using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class EntityHealth : MonoBehaviour, IEntityComponent, IAfterInitable
+namespace MGMG.Entities.Component
 {
-    public int Health { get; private set; }
 
-    public float LastAttackTime { get; set; }
-    [SerializeField] private StatElementSO _healthSO;
-
-    private Entity _owner;
-    public StatElement MaxHealthElement { get; private set; }
-    private bool _isInvincible;
-    private bool _isDie;
-
-    public int MaxHealth => Mathf.CeilToInt(MaxHealthElement.Value);
-    public event Action<int, int, bool> OnHealthChangedEvent;
-    public event Action OnDieEvent;
-
-    public void Initialize(Entity entity)
+    public class EntityHealth : MonoBehaviour, IEntityComponent, IAfterInitable
     {
-        _owner = entity;
-    }
+        public int Health { get; private set; }
 
-    public void SetInvincible(bool isInvinvible)
-    {
-        _isInvincible = isInvinvible;
-    }
+        public float LastAttackTime { get; set; }
+        [SerializeField] private StatElementSO _healthSO;
 
-    public void AfterInit()
-    {
-        MaxHealthElement = _owner.GetCompo<EntityStat>().StatDictionary[_healthSO];
-        _isInvincible = MaxHealthElement == null;
-        Health = MaxHealth;
+        private Entity _owner;
+        public StatElement MaxHealthElement { get; private set; }
+        private bool _isInvincible;
+        private bool _isDie;
 
-        if (MaxHealthElement != null) MaxHealthElement.OnValueChanged += HandleMaxHealthChangedEvent;
-    }
+        public int MaxHealth => Mathf.CeilToInt(MaxHealthElement.Value);
+        public event Action<int, int, bool> OnHealthChangedEvent;
+        public event Action OnDieEvent;
 
-    private void HandleMaxHealthChangedEvent(float prev, float current)
-    {
-        int prevHealth = Health;
-        if (Health > current) Health = Mathf.CeilToInt(current);
-        OnHealthChangedEvent?.Invoke(prevHealth, Health, false);
-    }
-
-    public void ApplyDamage(EntityStat statCompo, int damage, bool isChangeVisible = true, bool isTextVisible = true)
-    {
-        if (_isDie) return;
-        if (_isInvincible) return;
-
-
-        bool isCritical = false;
-        float random = Random.Range(0f, 100f);
-        if (random < statCompo.StatDictionary["Critical"].Value)
+        public void Initialize(Entity entity)
         {
-            isCritical = true;
-            damage = Mathf.CeilToInt(damage * (statCompo.StatDictionary["CriticalDamage"].Value / 100));
+            _owner = entity;
         }
 
-        int prev = Health;
-        Health -= damage;
-        if (Health < 0)
-            Health = 0;
-        OnHealthChangedEvent?.Invoke(prev, Health, isChangeVisible);
+        public void SetInvincible(bool isInvinvible)
+        {
+            _isInvincible = isInvinvible;
+        }
 
-        //if (_owner is not Player)
-        //{
-        //    PlayerManager.Instance.AddCircleSkillGauge(damage * (1f / 1000));
-        //}
-
-        //if (isTextVisible)
-        //{
-        //    DamageText damageText = PoolManager.Instance.Pop(PoolingType.DamageText) as DamageText;
-        //    damageText.Setting(damage, isCritical, transform.position);
-        //}
-
-        if (Health == 0) Die();
-    }
-
-
-
-    public void ApplyRecovery(int recovery, bool isChangeVisible = true)
-    {
-        if (_isDie) return;
-
-        int prev = Health;
-        Health += recovery;
-        if (Health > MaxHealth)
+        public void AfterInit()
+        {
+            MaxHealthElement = _owner.GetCompo<EntityStat>().StatDictionary[_healthSO];
+            _isInvincible = MaxHealthElement == null;
             Health = MaxHealth;
-        OnHealthChangedEvent?.Invoke(prev, Health, isChangeVisible);
-    }
 
-    public void Resurrection()
-    {
-        _isDie = false;
-        ApplyRecovery(MaxHealth, false);
-    }
+            if (MaxHealthElement != null) MaxHealthElement.OnValueChanged += HandleMaxHealthChangedEvent;
+        }
 
-    public void Die()
-    {
-        _isDie = true;
-        OnDieEvent?.Invoke();
-        if (MaxHealthElement != null) MaxHealthElement.OnValueChanged -= HandleMaxHealthChangedEvent;
-    }
+        private void HandleMaxHealthChangedEvent(float prev, float current)
+        {
+            int prevHealth = Health;
+            if (Health > current) Health = Mathf.CeilToInt(current);
+            OnHealthChangedEvent?.Invoke(prevHealth, Health, false);
+        }
 
-    public void Dispose()
-    {
-        throw new NotImplementedException();
+        public void ApplyDamage(EntityStat statCompo, int damage, bool isChangeVisible = true, bool isTextVisible = true)
+        {
+            if (_isDie) return;
+            if (_isInvincible) return;
+
+
+            bool isCritical = false;
+            float random = Random.Range(0f, 100f);
+            if (random < statCompo.StatDictionary["Critical"].Value)
+            {
+                isCritical = true;
+                damage = Mathf.CeilToInt(damage * (statCompo.StatDictionary["CriticalDamage"].Value / 100));
+            }
+
+            int prev = Health;
+            Health -= damage;
+            if (Health < 0)
+                Health = 0;
+            OnHealthChangedEvent?.Invoke(prev, Health, isChangeVisible);
+
+            //if (_owner is not Player)
+            //{
+            //    PlayerManager.Instance.AddCircleSkillGauge(damage * (1f / 1000));
+            //}
+
+            //if (isTextVisible)
+            //{
+            //    DamageText damageText = PoolManager.Instance.Pop(PoolingType.DamageText) as DamageText;
+            //    damageText.Setting(damage, isCritical, transform.position);
+            //}
+
+            if (Health == 0) Die();
+        }
+
+
+
+
+        public void ApplyRecovery(int recovery, bool isChangeVisible = true)
+        {
+            if (_isDie) return;
+
+            int prev = Health;
+            Health += recovery;
+            if (Health > MaxHealth)
+                Health = MaxHealth;
+            OnHealthChangedEvent?.Invoke(prev, Health, isChangeVisible);
+        }
+
+        public void Resurrection()
+        {
+            _isDie = false;
+            ApplyRecovery(MaxHealth, false);
+        }
+
+        public void Die()
+        {
+            _isDie = true;
+            OnDieEvent?.Invoke();
+            if (MaxHealthElement != null) MaxHealthElement.OnValueChanged -= HandleMaxHealthChangedEvent;
+        }
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -1,4 +1,4 @@
-using MGMG.Entity.Component;
+using MGMG.Entities.Component;
 using UnityEditor;
 using UnityEngine;
 

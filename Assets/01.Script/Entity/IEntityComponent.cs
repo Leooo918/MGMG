@@ -1,4 +1,4 @@
-namespace MGMG.Entity
+namespace MGMG.Entities
 {
     public interface IEntityComponent
     {

@@ -1,9 +1,8 @@
-using MGMG.StatSystem;
 using MGMG.Anim;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace MGMG.Entity.Component
+namespace MGMG.Entities.Component
 {
     public class EntityRenderer : MonoBehaviour, IEntityComponent
     {
@@ -15,10 +14,7 @@ namespace MGMG.Entity.Component
         public List<SpriteRenderer> SpriteRendererList { get; private set; } = new List<SpriteRenderer>();
         private Material _material;
 
-        private StatElement _sizeStat;
-        [SerializeField] private StatElementSO _sizeStatSO;
-        [SerializeField] private int _defaultPoint = 3;
-        [SerializeField] private float _radius = 0.5f;
+        
         [SerializeField] private float _rotationSpeed = 5;
 
         public void Initialize(Entity entity)
@@ -33,11 +29,7 @@ namespace MGMG.Entity.Component
             _material = SpriteRendererList[0].material;
         }
 
-        private void Update()
-        {
-            transform.parent.localScale = Vector3.one * _sizeStat.Value;
-        }
-
+                                                                                                                                                                                                                                                                                                                                                                                                                                   
         public void SetParam(AnimParamSO param, bool value) => Animator.SetBool(param.hashValue, value);
         public void SetParam(AnimParamSO param, float value) => Animator.SetFloat(param.hashValue, value);
         public void SetParam(AnimParamSO param, int value) => Animator.SetInteger(param.hashValue, value);
