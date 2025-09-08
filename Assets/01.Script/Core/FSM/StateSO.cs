@@ -1,9 +1,14 @@
+using MGMG.Anim;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "SO/FSM/StateSO")]
-public class StateSO : ScriptableObject
+namespace MGMG.FSM
 {
-    public string stateName;
-    public string className;
+    [CreateAssetMenu(menuName = "SO/FSM/StateSO")]
+    public class StateSO : ScriptableObject
+    {
+        public FSMState stateName;
+        public string className;
+        public AnimParamSO animParam;
 
+    }
 }
