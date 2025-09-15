@@ -60,7 +60,6 @@ namespace MGMG.Entities.Component
             if (CanManualMove)
             {
                 _rbCompo.linearVelocity = _movement * 10;
-                Debug.Log(_speedStat.Value);
             }
         }
 

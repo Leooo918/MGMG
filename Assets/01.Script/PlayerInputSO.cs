@@ -8,7 +8,7 @@ namespace MGMG.Input
     public class PlayerInputSO : ScriptableObject, Controls.IPlayerActions
     {
         public event Action DashEvent;
-
+        public event Action<Vector2> MoveEvent;
         public Vector2 InputDirection { get; private set; }
         public Vector3 MousePos { get; private set; }
 
@@ -31,7 +31,10 @@ namespace MGMG.Input
 
         public void OnMovement(InputAction.CallbackContext context)
         {
-            InputDirection = context.ReadValue<Vector2>();
+            MoveEvent?.Invoke(context.ReadValue<Vector2>().normalized);
+            if(!context.canceled)
+                InputDirection = context.ReadValue<Vector2>();
+            
         }
 
         public void OnDash(InputAction.CallbackContext context)
