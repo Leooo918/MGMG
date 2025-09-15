@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22a065677ab57c543874f5ba9e8b1589, type: 3}
   m_Name: X
   m_EditorClassIdentifier: 
-  paramName: Idle
-  paramType: 0
-  hashValue: 2081823275
+  paramName: X
+  paramType: 1
+  hashValue: -1213057461

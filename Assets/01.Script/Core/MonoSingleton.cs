@@ -1,34 +1,40 @@
+using System;
 using UnityEngine;
 
 public class MonoSingleton<T> : MonoBehaviour where T : MonoSingleton<T>
 {
-    private static T _instance;
+    private static T _Instance;
     public static T Instance
     {
         get
         {
-            if (_instance == null)
+            if (_Instance == null)
             {
-                _instance = FindFirstObjectByType<T>();
-                if (_instance == null)
+                _Instance = FindFirstObjectByType<T>();
+                if (_Instance == null)
                 {
-                    Debug.LogError($"Singleton of type {typeof(T)} not found in the scene.");
-                    return null;
+                    //없으면 만들기
+                    Type singleton = typeof(T);
+                    GameObject singletonObj = new GameObject($"{singleton.ToString()}", singleton);
+                    _Instance = singletonObj.GetComponent<T>();
                 }
+                if (_Instance._isInitialized == false)
+                    _Instance.FirstInitialize();
             }
-            return _instance;
+            return _Instance;
         }
     }
 
+    private bool _isInitialized;
+
     protected virtual void Awake()
     {
-        if (_instance == null)
-        {
-            _instance = this as T;
-        }
-        else if (_instance != this)
-        {
-            Destroy(gameObject);
-        }
+        if (_isInitialized) return;
+        FirstInitialize();
+    }
+
+    protected virtual void FirstInitialize()
+    {
+        _isInitialized = true;
     }
 }

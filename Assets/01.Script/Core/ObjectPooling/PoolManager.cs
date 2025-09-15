@@ -1,100 +1,122 @@
+using MGMG.Core.ObjectPooling;
+using MGMG.Util;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PoolManager : MonoSingleton<PoolManager>
 {
-    [SerializeField] private PoolGroupSO _poolGroup;
-    [SerializeField] private Transform _poolingObjectParent;
+    private Dictionary<PoolingKey, Pool<IPoolable>> _poolDictionary
+        = new Dictionary<PoolingKey, Pool<IPoolable>>();
 
-    private Dictionary<string, Stack<IPoolable>> _poolingDict;
-    private Dictionary<string, PoolSO> _poolSODict;
+    [VisibleInspectorSO]
+    public PoolListSO poolListSO;
 
-
-    protected override void Awake()
+    protected override void FirstInitialize()
     {
-        base.Awake();
-        InitializePool();
-    }
-
-    private void InitializePool()
-    {
-        _poolSODict = new Dictionary<string, PoolSO>();
-        _poolingDict = new Dictionary<string, Stack<IPoolable>>();
-        _poolGroup.poolList.ForEach(poolStruct =>
+        base.FirstInitialize();
+        foreach (PoolingItemSO item in poolListSO.GetList())
         {
-            Stack<IPoolable> poolStack = new Stack<IPoolable>();
-            for (int i = 0; i < poolStruct.poolCount; i++)
-            {
-                GameObject poolObject = Instantiate(poolStruct.poolSO.poolPrefab, _poolingObjectParent);
-                IPoolable poolable = poolObject.GetComponent<IPoolable>();
-                poolable.OnDespawned();
-
-                poolStack.Push(poolable);
-            }
-            _poolingDict.Add(poolStruct.poolSO.poolName, poolStack);
-            _poolSODict.Add(poolStruct.poolSO.poolName, poolStruct.poolSO);
-        });
-    }
-
-    public T Pop<T>(string poolName) where T : MonoBehaviour, IPoolable
-    {
-        if (_poolingDict.TryGetValue(poolName, out Stack<IPoolable> poolStack))
-        {
-            IPoolable poolable;
-            if (poolStack.TryPop(out poolable) == false)
-            {
-                GameObject poolObject = Instantiate(_poolSODict[poolName].poolPrefab, _poolingObjectParent);
-                poolable = poolObject.GetComponent<IPoolable>();
-            }
-
-            poolable.OnSpawned();
-            return poolable as T;
+            CreatePool(item);
         }
-        else
+    }
+
+    private void CreatePool(PoolingItemSO item)
+    {
+        var key = item.PoolObj.PoolEnum;
+        var pool = new Pool<IPoolable>(item.PoolObj, new PoolingKey(key), transform, item.poolCount);
+        _poolDictionary.Add(new PoolingKey(key), pool);
+    }
+
+    public IPoolable Pop(Enum type)
+    {
+        PoolingKey key = new PoolingKey(type);
+
+        if (!_poolDictionary.ContainsKey(key))
         {
-            Debug.LogError($"PoolObject named {poolName} is not exsist");
+            Debug.LogError($"Prefab does not exist on pool : {key}");
             return null;
         }
+
+        var item = _poolDictionary[key].Pop();
+        item.OnPop();
+        return item;
     }
 
-    public T Pop<T>(string poolName, Vector2 position) where T : MonoBehaviour, IPoolable
+    public void Push(IPoolable obj, bool resetParent = false)
     {
-        T poolable = Pop<T>(poolName);
-        poolable.transform.position = position;
-        return poolable;
+        if (resetParent)
+            obj.GameObject.transform.SetParent(transform);
+        obj.OnPush();
+        _poolDictionary[new PoolingKey(obj.PoolEnum)].Push(obj);
     }
+}
 
-    public T Pop<T>(string poolName, Vector2 position, Quaternion rotation) where T : MonoBehaviour, IPoolable
+public static class PoolingUtility
+{
+    public static IPoolable Pop(this GameObject gameObject, Enum type)
     {
-        T poolable = Pop<T>(poolName);
-        poolable.transform.position = position;
-        poolable.transform.rotation = rotation;
-        return poolable;
-    }
-
-    public void Push(string poolName, IPoolable pool)
-    {
-        if (_poolingDict.TryGetValue(poolName, out Stack<IPoolable> poolStack))
+        if (PoolManager.Instance == null)
         {
-            pool.OnDespawned();
-            poolStack.Push(pool);
+            Debug.LogError("PoolManager가 없습니다.");
+            return null;
         }
         else
         {
-            Debug.LogError($"PoolObject named {poolName} is not exsist");
+            IPoolable poolable = PoolManager.Instance.Pop(type);
+            GameObject obj = poolable.GameObject;
+            obj.transform.parent = null;
+            obj.transform.position = Vector3.zero;
+            return poolable;
         }
     }
-
-    public void Push<T>(string poolName, T pool) where T : MonoBehaviour, IPoolable
+    public static IPoolable Pop(this GameObject gameObject, Enum type, Transform parent)
     {
-        if (_poolingDict.TryGetValue(poolName, out Stack<IPoolable> poolStack))
+        if (PoolManager.Instance == null)
         {
-            pool.OnDespawned();
-            poolStack.Push(pool);
+            Debug.LogError("PoolManager가 없습니다.");
+            return null;
         }
         else
         {
-            Debug.LogError($"PoolObject named {poolName} is not exsist");
+            IPoolable poolable = PoolManager.Instance.Pop(type);
+            GameObject obj = poolable.GameObject;
+            obj.transform.parent = parent;
+            obj.transform.position = Vector3.zero;
+            return poolable;
+        }
+    }
+    public static IPoolable Pop(this GameObject gameObject, Enum type, Vector3 position, Quaternion rotation)
+    {
+        if (PoolManager.Instance == null)
+        {
+            Debug.LogError("PoolManager가 없습니다.");
+            return null;
+        }
+        else
+        {
+            IPoolable poolable = PoolManager.Instance.Pop(type);
+            GameObject obj = poolable.GameObject;
+            obj.transform.parent = null;
+            obj.transform.position = position;
+            obj.transform.rotation = rotation;
+            return poolable;
+        }
+    }
+    public static void Push(this IPoolable poolable)
+    {
+        PoolManager poolManager = PoolManager.Instance;
+        if (poolManager == null)
+        {
+            Debug.LogError("PoolManager가 없습니다.");
+        }
+        else
+        {
+            GameObject obj = poolable.GameObject;
+            obj.transform.parent = poolManager.transform;
+            obj.transform.position = Vector3.zero;
+            obj.transform.rotation = Quaternion.identity;
+            poolManager.Push(poolable);
         }
     }
 }
