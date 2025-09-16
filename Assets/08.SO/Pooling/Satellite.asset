@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a541969746dec442ad27fda4dfe4ba3, type: 3}
+  m_Script: {fileID: 11500000, guid: 276933710660f2e48856ee2e44bc93a6, type: 3}
   m_Name: Satellite
   m_EditorClassIdentifier: 
-  poolName: satellite
-  poolPrefab: {fileID: 4311801868362113545, guid: 6cef2f7b657f6e04ca58927bd03208cf, type: 3}
+  poolCount: 0
+  prefab: {fileID: 0}

@@ -4,9 +4,9 @@ namespace MGMG.Core.ObjectPooling
     public enum ObjectPoolingType
     {
     }
-    public enum ProjectilePoolingType
+    public enum SkillPoolingType
     {
-        
+        Satellite = 0,
     }
     public enum EnemyPoolingType
     {

@@ -33,7 +33,7 @@ namespace MGMG.Magic
         {
             foreach(var satellite in _satelliteList)
             {
-                satellite.SetRotation();
+                //satellite.SetRotation();
             }
         }
 
@@ -58,10 +58,10 @@ namespace MGMG.Magic
 
                 for (int i = 0; i < count; i++)
                 {
-                    Satellite satellite = PoolManager.Instance.Pop<Satellite>("satellite");
-                    satellite.transform.localPosition = Vector3.zero;
-                    satellite.transform.SetParent(_owner.transform);
-                    _satelliteList.Add(satellite);
+                    //Satellite satellite = PoolManager.Instance.Pop<Satellite>("satellite");
+                    //satellite.transform.localPosition = Vector3.zero;
+                    //satellite.transform.SetParent(_owner.transform);
+                    //_satelliteList.Add(satellite);
                 }
             }
             else if (satelliteCount < _satelliteList.Count)
@@ -70,9 +70,9 @@ namespace MGMG.Magic
 
                 for (int i = 0; i < count; i++)
                 {
-                    _rotationDictionary.Remove(_satelliteList[^1]);
-                    PoolManager.Instance.Push<Satellite>("satellite", _satelliteList[^1]);
-                    _satelliteList.RemoveAt(_satelliteList.Count - 1);
+                    //_rotationDictionary.Remove(_satelliteList[^1]);
+                    //PoolManager.Instance.Push<Satellite>("satellite", _satelliteList[^1]);
+                    //_satelliteList.RemoveAt(_satelliteList.Count - 1);
                 }
             }
 

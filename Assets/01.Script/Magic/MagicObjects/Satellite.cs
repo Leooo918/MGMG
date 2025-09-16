@@ -1,3 +1,5 @@
+using MGMG.Core.ObjectPooling;
+using System;
 using UnityEngine;
 
 namespace MGMG.Magic
@@ -7,6 +9,9 @@ namespace MGMG.Magic
         private int _damage;
         [SerializeField] private float _satelliteDistance = 5.0f;
         [SerializeField] private Transform _satelliteTrm;
+
+        public GameObject GameObject => gameObject;
+        public Enum PoolEnum => SkillPoolingType.Satellite;
 
         public void SetDistance(float distance)
         {
@@ -33,6 +38,16 @@ namespace MGMG.Magic
         public void OnDespawned()
         {
             gameObject.SetActive(false);
+        }
+
+        public void OnPop()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnPush()
+        {
+            throw new NotImplementedException();
         }
     }
 }
