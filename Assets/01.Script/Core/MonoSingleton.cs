@@ -1,40 +1,43 @@
 using System;
 using UnityEngine;
 
-public class MonoSingleton<T> : MonoBehaviour where T : MonoSingleton<T>
+namespace MGMG.Core
 {
-    private static T _Instance;
-    public static T Instance
+    public class MonoSingleton<T> : MonoBehaviour where T : MonoSingleton<T>
     {
-        get
+        private static T _Instance;
+        public static T Instance
         {
-            if (_Instance == null)
+            get
             {
-                _Instance = FindFirstObjectByType<T>();
                 if (_Instance == null)
                 {
-                    //없으면 만들기
-                    Type singleton = typeof(T);
-                    GameObject singletonObj = new GameObject($"{singleton.ToString()}", singleton);
-                    _Instance = singletonObj.GetComponent<T>();
+                    _Instance = FindFirstObjectByType<T>();
+                    if (_Instance == null)
+                    {
+                        //없으면 만들기
+                        Type singleton = typeof(T);
+                        GameObject singletonObj = new GameObject($"{singleton.ToString()}", singleton);
+                        _Instance = singletonObj.GetComponent<T>();
+                    }
+                    if (_Instance._isInitialized == false)
+                        _Instance.FirstInitialize();
                 }
-                if (_Instance._isInitialized == false)
-                    _Instance.FirstInitialize();
+                return _Instance;
             }
-            return _Instance;
         }
-    }
 
-    private bool _isInitialized;
+        private bool _isInitialized;
 
-    protected virtual void Awake()
-    {
-        if (_isInitialized) return;
-        FirstInitialize();
-    }
+        protected virtual void Awake()
+        {
+            if (_isInitialized) return;
+            FirstInitialize();
+        }
 
-    protected virtual void FirstInitialize()
-    {
-        _isInitialized = true;
+        protected virtual void FirstInitialize()
+        {
+            _isInitialized = true;
+        }
     }
 }

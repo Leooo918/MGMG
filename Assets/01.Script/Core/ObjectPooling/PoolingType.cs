@@ -10,6 +10,7 @@ namespace MGMG.Core.ObjectPooling
     }
     public enum EnemyPoolingType
     {
+        CombatEnemy
     }
     public enum UIPoolingType
     {

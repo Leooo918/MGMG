@@ -1,6 +1,10 @@
 using UnityEngine;
 
-public class MapManager : MonoSingleton<MapManager>
+namespace MGMG.Core
 {
-    
+    public class MapManager : MonoSingleton<MapManager>
+    {
+
+    }
+
 }

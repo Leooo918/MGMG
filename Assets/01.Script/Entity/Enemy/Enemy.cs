@@ -1,4 +1,5 @@
 ﻿using DG.Tweening;
+using MGMG.Core;
 using MGMG.Core.ObjectPooling;
 using MGMG.Entities;
 using MGMG.Entities.Component;
@@ -79,6 +80,7 @@ namespace MGMG.Enemies
             _statCompo = GetCompo<EntityStat>();
             _healthCompo = GetCompo<EntityHealth>();
             _healthCompo.OnDieEvent += HandleDieEvent;
+            _player = PlayerManager.Instance.Player;
             damageStat = _statCompo.StatDictionary[_damageSO];
             attackCooldownStat = _statCompo.StatDictionary[_attackCooldownSO];
         }
