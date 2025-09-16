@@ -1,7 +1,14 @@
+using System;
 using UnityEngine;
 
-public interface IPoolable
+namespace MGMG.Core.ObjectPooling
 {
-    public void OnSpawned();
-    public void OnDespawned();
+    public interface IPoolable
+    {
+        public GameObject GameObject { get; }
+        public Enum PoolEnum { get; }
+        public void OnPop();
+        public void OnPush();
+    }
+
 }
