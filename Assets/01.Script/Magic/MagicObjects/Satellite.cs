@@ -11,7 +11,8 @@ namespace MGMG.Magic
         [SerializeField] private Transform _satelliteTrm;
 
         public GameObject GameObject => gameObject;
-        public Enum PoolEnum => SkillPoolingType.Satellite;
+        public Enum PoolEnum => _poolingType;
+        [SerializeField] private SkillPoolingType _poolingType;
 
         public void SetDistance(float distance)
         {

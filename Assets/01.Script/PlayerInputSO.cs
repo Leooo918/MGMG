@@ -7,7 +7,6 @@ namespace MGMG.Input
     [CreateAssetMenu(fileName = "PlayerInputSO", menuName = "SO/PlayerInputSO")]
     public class PlayerInputSO : ScriptableObject, Controls.IPlayerActions
     {
-        public event Action DashEvent;
         public event Action MoveEvent;
         public Vector2 InputDirection { get; private set; }
         public Vector2 LastInputDirection { get; private set; }
@@ -40,11 +39,7 @@ namespace MGMG.Input
 
         }
 
-        public void OnDash(InputAction.CallbackContext context)
-        {
-            if (context.performed)
-                DashEvent?.Invoke();
-        }
+        
 
         public void OnMousePos(InputAction.CallbackContext context)
         {

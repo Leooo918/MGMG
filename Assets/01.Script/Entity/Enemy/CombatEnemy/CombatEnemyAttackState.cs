@@ -9,33 +9,38 @@ namespace MGMG.FSM
 {
     public class CombatEnemyAttackState : EntityState
     {
-        private CombatEnemy _enemy_6;
+        private CombatEnemy _enemy;
 
         private EntityMover _mover;
+        private EnemyAnimationTrigger _animTrigger;
 
         public CombatEnemyAttackState(Entity entity, AnimParamSO animParam) : base(entity, animParam)
         {
-            _enemy_6 = entity as CombatEnemy;
-            _mover = _enemy_6.GetCompo<EntityMover>();
+            _enemy = entity as CombatEnemy;
+            _animTrigger = _enemy.GetCompo<EnemyAnimationTrigger>();
+            _mover = _enemy.GetCompo<EntityMover>();
         }
 
         public override void Enter()
         {
             base.Enter();
 
-            _enemy_6.lastAttackTime = Time.time;
+            _enemy.lastAttackTime = Time.time;
 
+
+            _enemy.Attack();
             _mover.StopImmediately();
-
-            Sequence sequence = DOTween.Sequence().SetAutoKill(true);
-            sequence.Append(_renderer.transform.DORotate(new Vector3(0, 0, _renderer.transform.rotation.z + 360), 0.3f, RotateMode.FastBeyond360).SetEase(Ease.InBack));
-            sequence.InsertCallback(0.1f, _enemy_6.Attack);
-            sequence.AppendCallback(ChangeState);
+            _animTrigger.OnAnimationEndTrigger += ChangeState;
         }
 
+        public override void Exit()
+        {
+            base.Exit();
+            _animTrigger.OnAnimationEndTrigger -= ChangeState;
+        }
         private void ChangeState()
         {
-            _enemy_6.ChangeState(_enemy_6.enemyFSM[FSMState.Chase]);
+            _enemy.ChangeState(_enemy.enemyFSM[FSMState.Chase]);
         }
     }
 }

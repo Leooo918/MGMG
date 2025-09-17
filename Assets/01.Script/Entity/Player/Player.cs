@@ -64,7 +64,6 @@ namespace MGMG.Entities
         {
             base.AfterInitComponents();
 
-            PlayerInput.DashEvent += HandleDash;
 
             _health = GetCompo<EntityHealth>();
             _health.OnDieEvent += HandleDieEvent;
@@ -83,20 +82,8 @@ namespace MGMG.Entities
             Time.timeScale = 0.2f;
             Time.fixedDeltaTime = Time.timeScale / 200;
 
-            PlayerInput.DashEvent -= HandleDash;
             _health.OnDieEvent -= HandleDieEvent;
         }
-
-
-        private void HandleDash()
-        {
-            if (PlayerInput.InputDirection.sqrMagnitude > 0.05f && _currentCooltime < Time.time)
-            {
-                ChangeState(playerFSM[FSMState.Dash]);
-                _currentCooltime = Time.time + _dashCooltime;
-            }
-        }
-
 
         private void Start()
         {
@@ -109,7 +96,6 @@ namespace MGMG.Entities
         private void Update()
         {
             _stateMachine.UpdateStateMachine();
-            //_dashSkillUI.SetDashUIAmount(Mathf.Clamp((_currentCooltime - Time.time) / _dashCooltime, 0f, 1f));
         }
     }
 }

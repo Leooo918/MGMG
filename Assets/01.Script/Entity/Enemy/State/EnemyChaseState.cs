@@ -10,7 +10,7 @@ namespace MGMG.FSM
     {
         private Enemy _enemy;
 
-        private EntityMover _movement;
+        private EntityMover _mover;
         private EntityStat _statCompo;
 
 
@@ -22,7 +22,7 @@ namespace MGMG.FSM
         public override void Enter()
         {
             base.Enter();
-            _movement = _enemy.GetCompo<EntityMover>();
+            _mover = _enemy.GetCompo<EntityMover>();
             _statCompo = _enemy.GetCompo<EntityStat>();
         }
 
@@ -38,21 +38,13 @@ namespace MGMG.FSM
                 }
                 else
                 {
-                    if (_enemy.enemyFSM[FSMState.Idle] == null)
-                    {
-                        _renderer.SetRotation(_enemy.PlayerDirection());
-                        _movement.StopImmediately();
-                    }
-                    else
-                    {
-                        _enemy.ChangeState(_enemy.enemyFSM[FSMState.Idle]);
-                    }
+                    _enemy.ChangeState(_enemy.enemyFSM[FSMState.Idle]);
                 }
             }
             else
             {
                 Vector2 movement = _enemy.PlayerDirection();
-                _movement.SetMovement(movement);
+                _mover.SetMovement(movement);
             }
         }
 

@@ -102,7 +102,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af1e043e58474e64093de99e4f612e5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rotationSpeed: 5
 --- !u!95 &1817737234947082843
 Animator:
   serializedVersion: 7
@@ -183,7 +182,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abffdf211c2083c42bee3c09d6324271, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeedSO: {fileID: 11400000, guid: b4e49fb8dbd65e64aa94c2ac41d01cdb, type: 2}
+  _speed: 10
 --- !u!1 &4043654566974818023
 GameObject:
   m_ObjectHideFlags: 0
@@ -248,7 +247,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &3837595183597795900
 BoxCollider2D:
   m_ObjectHideFlags: 0

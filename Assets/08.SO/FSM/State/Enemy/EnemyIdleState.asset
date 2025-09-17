@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4292164a786be944c9bb175ddfc0b794, type: 3}
-  m_Name: CombatEnemyAttackState
+  m_Name: EnemyIdleState
   m_EditorClassIdentifier: 
-  stateName: 2
-  className: MGMG.FSM.CombatEnemyAttackState
-  animParam: {fileID: 11400000, guid: b75caab310867c94799e8bf73238737d, type: 2}
+  stateName: 0
+  className: MGMG.FSM.EnemyIdleState
+  animParam: {fileID: 11400000, guid: c87757fa2e160d947b57d67a89f1c3f8, type: 2}

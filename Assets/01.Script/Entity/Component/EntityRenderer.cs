@@ -6,8 +6,6 @@ namespace MGMG.Entities.Component
 {
     public class EntityRenderer : MonoBehaviour, IEntityComponent
     {
-        public float FacingDirection { get; private set; } = 1;
-        public float Direction { get; private set; }
 
         private Entity _entity;
         public Animator Animator { get; private set; }
@@ -35,19 +33,5 @@ namespace MGMG.Entities.Component
         public void SetParam(AnimParamSO param, int value) => Animator.SetInteger(param.hashValue, value);
         public void SetParam(AnimParamSO param) => Animator.SetTrigger(param.hashValue);
 
-        #region FlipControl
-
-        public void SetRotation(Vector3 dir, bool isImmadient = false)
-        {
-            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90;
-            Quaternion targetRotation = Quaternion.Euler(0, 0, angle);
-
-            if (isImmadient)
-                transform.parent.rotation = targetRotation;
-            else
-                transform.parent.rotation = Quaternion.Slerp(transform.parent.rotation, targetRotation, Time.deltaTime * _rotationSpeed);
-            Direction = angle;
-        }
-        #endregion
     }
 }

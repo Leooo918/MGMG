@@ -1,25 +1,30 @@
 using UnityEngine;
 using MGMG.StatSystem;
+using System;
+using DG.Tweening;
 
 namespace MGMG.Entities.Component
 {
     public class EntityMover : MonoBehaviour, IEntityComponent, IAfterInitable
     {
-        [SerializeField] private StatElementSO moveSpeedSO;
         private Vector2 _movement;
         [Header("AnimParams")]
 
         public Vector2 Velocity => _rbCompo.linearVelocity;
-        public bool CanManualMove { get; set; } = true; //키보드로 움직임 가능
+        private Vector2 _lastVelocity;
+        public Vector2 LastVelocity => _lastVelocity;
+        public bool CanManualMove { get; set; } = true; 
+        
         public float SpeedMultiplier { get; set; } = 1f;
 
+        [SerializeField] private float _speed;
         private Rigidbody2D _rbCompo;
         private Entity _entity;
         private EntityRenderer _renderer;
         private EntityStat _statCompo;
         private StatElement _speedStat;
 
-
+        public bool IsStopped { get; set; } = false;
         private Collider2D _collider;
 
         public void Initialize(Entity entity)
@@ -33,8 +38,6 @@ namespace MGMG.Entities.Component
 
         public void AfterInit()
         {
-            
-            _speedStat = _statCompo.StatDictionary[moveSpeedSO];
         }
 
         public void AddForceToEntity(Vector2 force, ForceMode2D mode = ForceMode2D.Impulse)
@@ -44,6 +47,7 @@ namespace MGMG.Entities.Component
 
         public void StopImmediately()
         {
+            _lastVelocity = _rbCompo.linearVelocity;
             _rbCompo.linearVelocity = Vector2.zero;
             _movement = Vector2.zero;
         }
@@ -55,11 +59,17 @@ namespace MGMG.Entities.Component
             MoveCharacter();
         }
 
+        
+
         private void MoveCharacter()
         {
             if (CanManualMove)
             {
-                _rbCompo.linearVelocity = _movement * 10;
+                _rbCompo.linearVelocity = _movement * _speed;
+                if (_rbCompo.linearVelocity.sqrMagnitude > 0.001f)
+                {
+                    _lastVelocity = _rbCompo.linearVelocity;
+                }
             }
         }
 

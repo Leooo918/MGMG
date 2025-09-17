@@ -11,7 +11,7 @@ using UnityEngine;
 
 namespace MGMG.Enemies
 {
-    public class Enemy : Entity, IPoolable
+    public abstract class Enemy : Entity, IPoolable
     {
         public LayerMask whatIsTarget;
         #region FSM
@@ -109,7 +109,6 @@ namespace MGMG.Enemies
         {
             _stateMachine.UpdateStateMachine();
 
-            _renderer.SetRotation(PlayerDirection());
         }
 
 
@@ -118,8 +117,8 @@ namespace MGMG.Enemies
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(transform.position, _attackRange);
         }
-        
-        
+
+        public abstract void Attack();
     }
 }
 

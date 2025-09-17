@@ -11,7 +11,7 @@ namespace MGMG.Enemies
 
         public StatElement delayTime { get; private set; }
 
-        public void Attack()
+        public override void Attack()
         {
             if (_defaultAttackCaster.CheckCollision(out RaycastHit2D[] hits, whatIsTarget))
             {

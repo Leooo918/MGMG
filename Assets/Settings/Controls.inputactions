@@ -16,15 +16,6 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Dash",
-                    "type": "Button",
-                    "id": "a13c1aa8-b100-45c3-b80e-994059d22bb7",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "MousePos",
                     "type": "Value",
                     "id": "7f94baf3-f79d-4f32-bfef-a3cf1097119a",
@@ -89,17 +80,6 @@
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
-                },
-                {
-                    "name": "",
-                    "id": "5cbfabb4-5ccf-46bf-b05c-4601ae407795",
-                    "path": "<Keyboard>/leftShift",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";KeyMouse",
-                    "action": "Dash",
-                    "isComposite": false,
-                    "isPartOfComposite": false
                 },
                 {
                     "name": "",
