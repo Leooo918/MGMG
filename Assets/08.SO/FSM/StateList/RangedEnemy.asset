@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4891d013cf974f14c98044796d2dbd77, type: 3}
-  m_Name: CombatEnemy
+  m_Name: RangedEnemy
   m_EditorClassIdentifier: 
   states:
   - {fileID: 11400000, guid: 1ddacf572dc7a1c468a1f4b2d9827ed7, type: 2}
-  - {fileID: 11400000, guid: 6e73355ee480fee45bffc6e9daf75a33, type: 2}
   - {fileID: 11400000, guid: 0950f746c1f83f54080fb30bbaa1c78c, type: 2}
-  - {fileID: 11400000, guid: cd0718bd03aea854092a44e25ce725c2, type: 2}
+  - {fileID: 11400000, guid: 6e73355ee480fee45bffc6e9daf75a33, type: 2}
+  - {fileID: 11400000, guid: 9fff8ce057695824186f9481ca630421, type: 2}

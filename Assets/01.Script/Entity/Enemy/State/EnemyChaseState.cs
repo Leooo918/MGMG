@@ -24,6 +24,8 @@ namespace MGMG.FSM
             base.Enter();
             _mover = _enemy.GetCompo<EntityMover>();
             _statCompo = _enemy.GetCompo<EntityStat>();
+
+            _mover.LockVisualVelocity = false;
         }
 
         public override void Update()

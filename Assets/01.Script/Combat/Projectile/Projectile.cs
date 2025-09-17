@@ -21,7 +21,7 @@ namespace MGMG.Combat.Projectile
         [SerializeField] private float _lifetime = 3f;
         private float _popTime;
 
-        [SerializeField] private ObjectPoolingType _poolingType { get; set; }
+        [SerializeField] private ObjectPoolingType _poolingType;
         public GameObject GameObject => gameObject;
 
         public Enum PoolEnum => _poolingType;

@@ -1,4 +1,4 @@
-﻿using MGMG.Anim;
+using MGMG.Anim;
 using MGMG.Enemies;
 using MGMG.Entities;
 using MGMG.Entities.Component;
@@ -6,24 +6,21 @@ using UnityEngine;
 
 namespace MGMG.FSM
 {
-    public class EnemyIdleState : EntityState
+    public class RangedEnemyAttackState : EntityState
     {
-        private Enemy _enemy;
+        private RangedEnemy _enemy;
         private EntityMover _mover;
-        public EnemyIdleState(Entity entity, AnimParamSO animParam) : base(entity, animParam)
+        public RangedEnemyAttackState(Entity entity, AnimParamSO animParam) : base(entity, animParam)
         {
-            _enemy = entity as Enemy;
-            _mover = _enemy.GetCompo<EntityMover>();
+            _enemy = entity as RangedEnemy;
+            _mover = entity.GetCompo<EntityMover>();
         }
+
 
         public override void Enter()
         {
             base.Enter();
-            _mover = _enemy.GetCompo<EntityMover>();
-
-            _mover.LockVisualVelocity = true;
-
-            _mover.StopImmediately(true);
+            _mover.StopImmediately();
         }
 
         public override void Update()
@@ -34,7 +31,11 @@ namespace MGMG.FSM
             {
                 if (_enemy.lastAttackTime + _enemy.attackCooldownStat.Value < Time.time)
                 {
-                    _enemy.ChangeState(_enemy.enemyFSM[FSMState.Attack]);
+                    _enemy.Attack();
+                }
+                else
+                {
+                    _enemy.ChangeState(_enemy.enemyFSM[FSMState.Idle]);
                 }
             }
             else

@@ -22,7 +22,7 @@ namespace MGMG.Entities.Component
 
         private void Update()
         {
-            Vector2 enemyVelocity = _mover.Velocity.sqrMagnitude > 0.001f ? _mover.Velocity.normalized : _mover.LastVelocity.normalized;
+            Vector2 enemyVelocity = _mover.VisualVelocity.normalized;
 
             _renderer.SetParam(_xAnimParam, enemyVelocity.x);
             _renderer.SetParam(_yAnimParam, enemyVelocity.y);

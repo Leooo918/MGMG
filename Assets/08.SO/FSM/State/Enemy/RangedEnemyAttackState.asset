@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b37326f26a194b545b8ac7743136c182, type: 3}
-  m_Name: PoolList
+  m_Script: {fileID: 11500000, guid: 4292164a786be944c9bb175ddfc0b794, type: 3}
+  m_Name: RangedEnemyAttackState
   m_EditorClassIdentifier: 
-  _list:
-  - {fileID: 0}
+  stateName: 2
+  className: MGMG.FSM.RangedEnemyAttackState
+  animParam: {fileID: 11400000, guid: b75caab310867c94799e8bf73238737d, type: 2}

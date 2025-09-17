@@ -8,11 +8,21 @@ namespace MGMG.Entities.Component
     public class EntityMover : MonoBehaviour, IEntityComponent, IAfterInitable
     {
         private Vector2 _movement;
-        [Header("AnimParams")]
+        private Vector2 _lastVelocity;   
+        private bool _lockVisualVelocity;
 
         public Vector2 Velocity => _rbCompo.linearVelocity;
-        private Vector2 _lastVelocity;
-        public Vector2 LastVelocity => _lastVelocity;
+
+        public Vector2 VisualVelocity
+            => _lockVisualVelocity
+               ? (_lastVelocity.sqrMagnitude > 0.001f ? _lastVelocity : _rbCompo.linearVelocity)
+               : _rbCompo.linearVelocity;
+
+        public bool LockVisualVelocity
+        {
+            get => _lockVisualVelocity;
+            set => _lockVisualVelocity = value;
+        }
         public bool CanManualMove { get; set; } = true; 
         
         public float SpeedMultiplier { get; set; } = 1f;
@@ -45,9 +55,11 @@ namespace MGMG.Entities.Component
             _rbCompo.AddForce(force, mode);
         }
 
-        public void StopImmediately()
+        public void StopImmediately(bool preserveForVisual = true)
         {
-            _lastVelocity = _rbCompo.linearVelocity;
+            if (preserveForVisual)
+                _lastVelocity = _rbCompo.linearVelocity; 
+
             _rbCompo.linearVelocity = Vector2.zero;
             _movement = Vector2.zero;
         }
@@ -59,17 +71,16 @@ namespace MGMG.Entities.Component
             MoveCharacter();
         }
 
-        
+
 
         private void MoveCharacter()
         {
             if (CanManualMove)
             {
                 _rbCompo.linearVelocity = _movement * _speed;
+
                 if (_rbCompo.linearVelocity.sqrMagnitude > 0.001f)
-                {
                     _lastVelocity = _rbCompo.linearVelocity;
-                }
             }
         }
 

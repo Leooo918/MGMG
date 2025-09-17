@@ -13,8 +13,6 @@ namespace MGMG.Entities.Component
         private Material _material;
 
         
-        [SerializeField] private float _rotationSpeed = 5;
-
         public void Initialize(Entity entity)
         {
             _entity = entity;
