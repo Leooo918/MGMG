@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 069bab2727a38cb4791aebad7125e9f2, type: 3}
+  m_Name: CycloneBladeMagic
+  m_EditorClassIdentifier: 
+  magicName: CycloneBlade
+  magic:
+    rid: 1995755839839797337
+  magicData:
+    rid: 1995755839839797338
+  references:
+    version: 2
+    RefIds:
+    - rid: 1995755839839797337
+      type: {class: CycloneBladeMagic, ns: MGMG.Magic, asm: Assembly-CSharp}
+      data: 
+    - rid: 1995755839839797338
+      type: {class: CycloneBladeMagicData, ns: MGMG.Magic, asm: Assembly-CSharp}
+      data:
+        name: CycloneBlade
+        description: 
+        icon: {fileID: 0}
+        magicSchool: 0
+        maxLevel: 5
+        coolDownPerLevel: 0600000005000000040000000300000002000000
+        bladeCountPerLevel: 0100000001000000020000000200000003000000

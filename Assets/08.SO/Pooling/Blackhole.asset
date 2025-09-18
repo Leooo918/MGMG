@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 276933710660f2e48856ee2e44bc93a6, type: 3}
-  m_Name: Satellite
+  m_Name: Blackhole
   m_EditorClassIdentifier: 
-  poolCount: 10
-  prefab: {fileID: 2735958260335524758, guid: 6cef2f7b657f6e04ca58927bd03208cf, type: 3}
+  poolCount: 5
+  prefab: {fileID: 5530405522455571261, guid: 4a00d0d5b05b3064bb34e100e8d623a8, type: 3}

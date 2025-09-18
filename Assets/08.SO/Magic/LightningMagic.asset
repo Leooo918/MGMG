@@ -10,29 +10,30 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 069bab2727a38cb4791aebad7125e9f2, type: 3}
-  m_Name: SatelliteMagic
+  m_Name: LightningMagic
   m_EditorClassIdentifier: 
-  magicName: Satellite
+  magicName: Lightning
   magic:
-    rid: 1995755652249288790
+    rid: 1995755839839797331
   magicData:
-    rid: 1995755652249288791
+    rid: 1995755839839797332
   references:
     version: 2
     RefIds:
-    - rid: 1995755652249288790
-      type: {class: SatelliteMagic, ns: MGMG.Magic, asm: Assembly-CSharp}
+    - rid: 1995755839839797331
+      type: {class: LightningMagic, ns: MGMG.Magic, asm: Assembly-CSharp}
       data: 
-    - rid: 1995755652249288791
-      type: {class: SatelliteMagicData, ns: MGMG.Magic, asm: Assembly-CSharp}
+    - rid: 1995755839839797332
+      type: {class: LightningMagicData, ns: MGMG.Magic, asm: Assembly-CSharp}
       data:
-        name: Satellite
+        name: Lightning
         description: 
         icon: {fileID: 0}
-        magicSchool: 0
+        magicSchool: 1
         maxLevel: 5
         coolDownPerLevel: 0500000004000000030000000200000001000000
-        satelliteDistance: 3
-        satelliteRotateSpeed: 360
-        satelliteCountPerLevel: 0300000003000000040000000400000005000000
-        satelliteDamagePerLevel: 0200000003000000040000000500000006000000
+        range: 7
+        whatIsEnemy:
+          serializedVersion: 2
+          m_Bits: 128
+        levelPerMagicCount: 

@@ -41,7 +41,7 @@ namespace MGMG.Entities
             {
                 _containMagic[i].OnUpdate();
 
-                if (_prevMagicUseTime[i] + _containMagic[i].GetCoolTime() > Time.time )
+                if (_prevMagicUseTime[i] + _containMagic[i].GetCoolTime() < Time.time )
                 {
                     _prevMagicUseTime[i] = Time.time;
                     _containMagic[i].OnUseSkill();

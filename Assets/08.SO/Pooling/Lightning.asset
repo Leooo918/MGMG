@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 276933710660f2e48856ee2e44bc93a6, type: 3}
-  m_Name: Satellite
+  m_Name: Lightning
   m_EditorClassIdentifier: 
   poolCount: 10
-  prefab: {fileID: 2735958260335524758, guid: 6cef2f7b657f6e04ca58927bd03208cf, type: 3}
+  prefab: {fileID: 2811429286221760560, guid: 479d79b3a58804048b549fee0719280a, type: 3}

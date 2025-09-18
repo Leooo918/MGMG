@@ -43,12 +43,12 @@ namespace MGMG.Magic
 
         public void OnPop()
         {
-            throw new NotImplementedException();
+
         }
 
         public void OnPush()
         {
-            throw new NotImplementedException();
+
         }
     }
 }
