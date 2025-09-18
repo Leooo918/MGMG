@@ -5,122 +5,125 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 
-public class UIManager : MonoSingleton<UIManager>
+namespace MGMG.Core
 {
-    [SerializeField] private Canvas _canvas;
-    [SerializeField] private Image _selectPanel;
-    //private Slider _hpSlider;
-    private Slider _xpSlider;
-    
-    private Image[] _magicImages;
-    private Image[] _cardImages;
-
-    private int _magicCurrentIndex = 0;
-    private int _cardCurrentIndex = 0;
-
-    private int _selectPanelCloseYPos = 1080;
-    private int _selectPanelShowYPos = 0;
-    
-    protected override void Awake()
+    public class UIManager : MonoSingleton<UIManager>
     {
-        base.Awake();
-        _canvas = GetComponent<Canvas>();
+        [SerializeField] private Canvas _canvas;
+        [SerializeField] private Image _selectPanel;
+        //private Slider _hpSlider;
+        private Slider _xpSlider;
 
-        _xpSlider = _canvas.transform.Find("XPSlider").GetComponent<Slider>();
-    }
+        private Image[] _magicImages;
+        private Image[] _cardImages;
 
-    private void Start()
-    {
-        Transform magicPanel = _canvas.transform.Find("MagicPanel");
+        private int _magicCurrentIndex = 0;
+        private int _cardCurrentIndex = 0;
 
-        if (magicPanel != null)
+        private int _selectPanelCloseYPos = 1080;
+        private int _selectPanelShowYPos = 0;
+
+        protected override void Awake()
         {
-            List<Image> magicList = new List<Image>();
+            base.Awake();
+            _canvas = GetComponent<Canvas>();
 
-            foreach (Transform child in magicPanel)
+            _xpSlider = _canvas.transform.Find("XPSlider").GetComponent<Slider>();
+        }
+
+        private void Start()
+        {
+            Transform magicPanel = _canvas.transform.Find("MagicPanel");
+
+            if (magicPanel != null)
             {
-                if (child.name.Contains("MagicImage"))
+                List<Image> magicList = new List<Image>();
+
+                foreach (Transform child in magicPanel)
                 {
-                    Image img = child.GetComponent<Image>();
-                    if (img != null)
-                        magicList.Add(img);
+                    if (child.name.Contains("MagicImage"))
+                    {
+                        Image img = child.GetComponent<Image>();
+                        if (img != null)
+                            magicList.Add(img);
+                    }
                 }
+
+                _magicImages = magicList.ToArray();
             }
 
-            _magicImages = magicList.ToArray();
-        }
+            Transform cardPanel = _canvas.transform.Find("CardPanel");
 
-        Transform cardPanel = _canvas.transform.Find("CardPanel");
-
-        if(cardPanel != null)
-        {
-            List<Image> cardList = new List<Image>();
-
-            foreach(Transform child in cardPanel)
+            if (cardPanel != null)
             {
-                if(child.name.Contains("CardImage"))
+                List<Image> cardList = new List<Image>();
+
+                foreach (Transform child in cardPanel)
                 {
-                    Image img = child.GetComponent<Image>();
-                    if(img != null)
-                        cardList.Add(img);
+                    if (child.name.Contains("CardImage"))
+                    {
+                        Image img = child.GetComponent<Image>();
+                        if (img != null)
+                            cardList.Add(img);
+                    }
                 }
+
+                _cardImages = cardList.ToArray();
             }
-
-            _cardImages = cardList.ToArray();
         }
-    }
 
-    public void GetMagic(Sprite sprite)
-    {
-        if (_magicCurrentIndex < _magicImages.Length)
+        public void GetMagic(Sprite sprite)
         {
-            _magicImages[_magicCurrentIndex].sprite = sprite;
-            _magicCurrentIndex++;
+            if (_magicCurrentIndex < _magicImages.Length)
+            {
+                _magicImages[_magicCurrentIndex].sprite = sprite;
+                _magicCurrentIndex++;
+            }
         }
-    }
 
-    public void GetCard(Sprite sprite)
-    {
-        if (_cardCurrentIndex < _cardImages.Length)
+        public void GetCard(Sprite sprite)
         {
-            _cardImages[_cardCurrentIndex].sprite = sprite;
-            _cardCurrentIndex++;
+            if (_cardCurrentIndex < _cardImages.Length)
+            {
+                _cardImages[_cardCurrentIndex].sprite = sprite;
+                _cardCurrentIndex++;
+            }
         }
-    }
 
-    public void ImvisibleImage()
-    {
+        public void ImvisibleImage()
+        {
 
-    }
+        }
 
-    public void HpApply(int damage)
-    {
-        //_hpSlider.value += damage;
-    }
+        public void HpApply(int damage)
+        {
+            //_hpSlider.value += damage;
+        }
 
-    public void XpApply(int value)
-    {
-        _xpSlider.value += value;
+        public void XpApply(int value)
+        {
+            _xpSlider.value += value;
 
-        //if (_xpSlider.value >= _xpSlider.maxValue)
-        //{
-        //    _xpSlider.value = 0;
-        //}
-    }
+            //if (_xpSlider.value >= _xpSlider.maxValue)
+            //{
+            //    _xpSlider.value = 0;
+            //}
+        }
 
-    public void ShowSelectPanel()
-    {
-        _selectPanel.rectTransform
-       .DOAnchorPosY(_selectPanelShowYPos, 0.5f)
-       .SetEase(Ease.OutBounce);
-        //Time.timeScale = 0;
-    }
+        public void ShowSelectPanel()
+        {
+            _selectPanel.rectTransform
+           .DOAnchorPosY(_selectPanelShowYPos, 0.5f)
+           .SetEase(Ease.OutBounce);
+            //Time.timeScale = 0;
+        }
 
-    public void CloseSelectPanel()
-    {
-        //Time.timeScale = 1;
-        _selectPanel.rectTransform
-       .DOAnchorPosY(_selectPanelCloseYPos, 0.3f)
-       .SetEase(Ease.OutCirc);
+        public void CloseSelectPanel()
+        {
+            //Time.timeScale = 1;
+            _selectPanel.rectTransform
+           .DOAnchorPosY(_selectPanelCloseYPos, 0.3f)
+           .SetEase(Ease.OutCirc);
+        }
     }
 }
