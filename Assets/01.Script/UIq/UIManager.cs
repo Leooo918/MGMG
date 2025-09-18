@@ -24,6 +24,10 @@ namespace MGMG.Core
         private int _selectPanelCloseYPos = 1080;
         private int _selectPanelShowYPos = 0;
 
+        private int _escPanelCloseYPos = -1080;
+        private int _escPanelShowYPos = 0;
+
+        private bool _isOpen = false;
         protected override void Awake()
         {
             base.Awake();
@@ -79,16 +83,16 @@ namespace MGMG.Core
             #region get select panel child
             Transform selectPanel = _canvas.transform.Find("SelectPanel");
 
-            if(selectPanel != null)
+            if (selectPanel != null)
             {
                 List<Image> selectableImageList = new List<Image>();
 
-                foreach(Transform child in selectPanel)
+                foreach (Transform child in selectPanel)
                 {
-                    if(child.name.Contains("SelectCardImage"))
+                    if (child.name.Contains("SelectCardImage"))
                     {
                         Image img = child.GetComponent<Image>();
-                        if(img != null)
+                        if (img != null)
                             selectableImageList.Add(img);
                     }
                 }
@@ -100,9 +104,33 @@ namespace MGMG.Core
 
         private void Update()
         {
-            if(UnityEngine.Input.GetKeyDown(KeyCode.K))
+            if (UnityEngine.Input.GetKeyDown(KeyCode.K))
             {
-                ShowSelectPanel();
+                if(!_isOpen)
+                {
+                    ShowSelectPanel();
+                    _isOpen = true;
+
+                }
+                else
+                {
+                    CloseSelectPanel();
+                    _isOpen = false;
+                }
+            }
+
+            if (UnityEngine.Input.GetKeyDown(KeyCode.J))
+            {
+                if (!_isOpen)
+                {
+                    ShowEscPanel();
+                    _isOpen = true;
+                }
+                else
+                {
+                    CloseEscPanel();
+                    _isOpen = false;
+                }
             }
         }
 
@@ -161,16 +189,44 @@ namespace MGMG.Core
         {
             _selectPanel.rectTransform
            .DOAnchorPosY(_selectPanelShowYPos, 0.5f)
-           .SetEase(Ease.OutBounce);
-            //Time.timeScale = 0;
+           .SetEase(Ease.OutBounce)
+           .SetUpdate(true)
+           .OnComplete(() =>
+           {
+               Time.timeScale = 0;
+           });
         }
 
         public void CloseSelectPanel()
         {
-            //Time.timeScale = 1;
+            Time.timeScale = 1;
+
             _selectPanel.rectTransform
-           .DOAnchorPosY(_selectPanelCloseYPos, 0.3f)
-           .SetEase(Ease.OutCirc);
+                .DOAnchorPosY(_selectPanelCloseYPos, 0.3f)
+                .SetEase(Ease.OutCirc)
+                .SetUpdate(true);
+        }
+
+        public void ShowEscPanel()
+        {
+            _escPanel.rectTransform
+                .DOAnchorPosY(_escPanelShowYPos, 0.3f)
+                .SetEase(Ease.OutCirc)
+                .SetUpdate(true)
+                .OnComplete(() =>
+                {
+                    Time.timeScale = 0;
+                });
+        }
+
+        public void CloseEscPanel()
+        {
+            Time.timeScale = 1;
+
+            _escPanel.rectTransform
+                .DOAnchorPosY(_escPanelCloseYPos, 0.3f)
+                .SetEase(Ease.OutCirc)
+                .SetUpdate(true);
         }
     }
 }
