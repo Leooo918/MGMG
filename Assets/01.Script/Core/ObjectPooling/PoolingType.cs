@@ -23,6 +23,7 @@ namespace MGMG.Core.ObjectPooling
     }
     public enum UIPoolingType
     {
+        DamageText
     }
     public enum EffectPoolingType
     {

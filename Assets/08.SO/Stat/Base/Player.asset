@@ -22,9 +22,6 @@ MonoBehaviour:
   - Name: AttackPower
     elementSO: {fileID: 11400000, guid: 066e1e8ac736f0c4aae04c15e2ef3f79, type: 2}
     _valueString: 20
-  - Name: AttackSpeed
-    elementSO: {fileID: 11400000, guid: 1549c3f67b279454ca2554ef67f8c38f, type: 2}
-    _valueString: 1
   - Name: Speed
     elementSO: {fileID: 11400000, guid: b4e49fb8dbd65e64aa94c2ac41d01cdb, type: 2}
     _valueString: 10

@@ -15,7 +15,7 @@ MonoBehaviour:
   _statElements:
   - Name: Health
     elementSO: {fileID: 11400000, guid: 079c489854ed9494ca195d45b1990ba4, type: 2}
-    _valueString: 100
+    _valueString: 200
   - Name: Defense
     elementSO: {fileID: 11400000, guid: 16b59fa4a54ff82468c3b95af8a56917, type: 2}
     _valueString: 10

@@ -30,6 +30,7 @@ public class Blackhole : MonoBehaviour, IPoolable
             if(_collider[i].TryGetComponent(out Enemy enemy))
             {
                 // 뭔가 거리에 따라서 땡기기
+
             }
         }
         if(_lifeTime < Time.time)

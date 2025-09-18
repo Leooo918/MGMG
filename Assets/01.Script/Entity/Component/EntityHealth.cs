@@ -100,7 +100,6 @@ namespace MGMG.Entities.Component
 
         public void Dispose()
         {
-            throw new NotImplementedException();
         }
     }
 }

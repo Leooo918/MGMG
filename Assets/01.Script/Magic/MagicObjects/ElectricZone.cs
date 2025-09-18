@@ -1,5 +1,6 @@
 using MGMG.Core.ObjectPooling;
 using MGMG.Enemies;
+using MGMG.Entities.Component;
 using System;
 using UnityEngine;
 
@@ -45,7 +46,7 @@ public class ElectricZone : MonoBehaviour, IPoolable
             {
                 if(_collider[i].TryGetComponent(out Enemy enemy))
                 {
-                    
+                    enemy.GetCompo<EntityHealth>().ApplyDamage(enemy.GetCompo<EntityStat>(),200); 
                 }
             }
         }

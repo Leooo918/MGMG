@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 276933710660f2e48856ee2e44bc93a6, type: 3}
+  m_Name: CycloneBlade
+  m_EditorClassIdentifier: 
+  poolCount: 2
+  prefab: {fileID: 110830683475331872, guid: d707ac2d5b12f474191c49aa8715e3a2, type: 3}

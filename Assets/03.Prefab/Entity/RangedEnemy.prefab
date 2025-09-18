@@ -90,7 +90,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _overrideStatElementList: []
-  _baseStatSO: {fileID: 11400000, guid: 07b4ecc1a2d46d240b5c037cbdda2cd9, type: 2}
+  _baseStatSO: {fileID: 11400000, guid: 6760aea11e8309046b7272c7ff77e274, type: 2}
 --- !u!1 &3605470869685178543
 GameObject:
   m_ObjectHideFlags: 0
@@ -135,7 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abffdf211c2083c42bee3c09d6324271, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 0
+  _speed: 5
 --- !u!1 &6476783197851505709
 GameObject:
   m_ObjectHideFlags: 0
