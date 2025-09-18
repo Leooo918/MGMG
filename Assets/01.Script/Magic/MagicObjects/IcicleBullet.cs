@@ -39,7 +39,7 @@ public class IcicleBullet : MonoBehaviour, IPoolable
     {
         if(collision.TryGetComponent(out Enemy enemy))
         {
-            //데미지 넣고
+            //데미지 넣고i
             ContactFilter2D filter = new ContactFilter2D();
             filter.SetLayerMask(_whatIsEnemy);
             int count = Physics2D.OverlapCircle(transform.position, _explosionRange, filter, _collider);

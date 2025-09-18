@@ -56,10 +56,13 @@ namespace MGMG.Entities.Component
 
             bool isCritical = false;
             float random = Random.Range(0f, 100f);
-            if (random < statCompo.StatDictionary["Critical"].Value)
+            if (statCompo != null)
             {
-                isCritical = true;
-                damage = Mathf.CeilToInt(damage * (statCompo.StatDictionary["CriticalDamage"].Value / 100));
+                if (random < statCompo.StatDictionary["Critical"].Value)
+                {
+                    isCritical = true;
+                    damage = Mathf.CeilToInt(damage * (statCompo.StatDictionary["CriticalDamage"].Value / 100));
+                }
             }
 
             int prev = Health;
@@ -67,7 +70,7 @@ namespace MGMG.Entities.Component
             if (Health < 0)
                 Health = 0;
             OnHealthChangedEvent?.Invoke(prev, Health, isChangeVisible);
-              
+
             if (Health == 0) Die();
         }
 
