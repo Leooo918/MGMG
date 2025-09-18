@@ -28,7 +28,7 @@ MonoBehaviour:
       data:
         name: ElectricZone
         description: 
-        icon: {fileID: 0}
+        icon: {fileID: 21300000, guid: e3d72b1724a89604fad7dc2c671426ae, type: 3}
         magicSchool: 1
         maxLevel: 5
         coolDownPerLevel: 0900000008000000080000000700000007000000

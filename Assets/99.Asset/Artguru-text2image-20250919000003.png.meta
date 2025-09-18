@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Artguru-text2image-20250919000003_0: -472273163364692441
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
