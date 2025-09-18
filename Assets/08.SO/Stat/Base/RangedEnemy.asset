@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ed9b17438a6c3c47945e9045002a83e, type: 3}
+  m_Name: RangedEnemy
+  m_EditorClassIdentifier: 
+  _statElements:
+  - Name: Health
+    elementSO: {fileID: 11400000, guid: 079c489854ed9494ca195d45b1990ba4, type: 2}
+    _valueString: 100
+  - Name: Defense
+    elementSO: {fileID: 11400000, guid: 16b59fa4a54ff82468c3b95af8a56917, type: 2}
+    _valueString: 10
+  - Name: AttackPower
+    elementSO: {fileID: 11400000, guid: 066e1e8ac736f0c4aae04c15e2ef3f79, type: 2}
+    _valueString: 20
+  - Name: AttackSpeed
+    elementSO: {fileID: 11400000, guid: 1549c3f67b279454ca2554ef67f8c38f, type: 2}
+    _valueString: 0.2
+  - Name: Speed
+    elementSO: {fileID: 11400000, guid: b4e49fb8dbd65e64aa94c2ac41d01cdb, type: 2}
+    _valueString: 10
+  - Name: Critical
+    elementSO: {fileID: 11400000, guid: 5c5e50a6824045f4ab583ef291adc533, type: 2}
+    _valueString: 25
+  - Name: CriticalDamage
+    elementSO: {fileID: 11400000, guid: 1a5c2d29449116f468133ff9fcfe3171, type: 2}
+    _valueString: 150

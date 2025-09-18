@@ -67,18 +67,7 @@ namespace MGMG.Entities.Component
             if (Health < 0)
                 Health = 0;
             OnHealthChangedEvent?.Invoke(prev, Health, isChangeVisible);
-
-            //if (_owner is not Player)
-            //{
-            //    PlayerManager.Instance.AddCircleSkillGauge(damage * (1f / 1000));
-            //}
-
-            //if (isTextVisible)
-            //{
-            //    DamageText damageText = PoolManager.Instance.Pop(PoolingType.DamageText) as DamageText;
-            //    damageText.Setting(damage, isCritical, transform.position);
-            //}
-
+              
             if (Health == 0) Die();
         }
 

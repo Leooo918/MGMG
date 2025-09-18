@@ -3,39 +3,37 @@ using MGMG.Anim;
 using MGMG.Enemies;
 using MGMG.Entities;
 using MGMG.Entities.Component;
+using System;
 using UnityEngine;
 
 namespace MGMG.FSM
 {
-    public class CombatEnemyAttackState : EntityState
+    public class RangedEnemyAttackState : EntityState
     {
-        private CombatEnemy _enemy;
-
+        private RangedEnemy _enemy;
         private EntityMover _mover;
         private EnemyAnimationTrigger _animTrigger;
-
-        public CombatEnemyAttackState(Entity entity, AnimParamSO animParam) : base(entity, animParam)
+        public RangedEnemyAttackState(Entity entity, AnimParamSO animParam) : base(entity, animParam)
         {
-            _enemy = entity as CombatEnemy;
+            _enemy = entity as RangedEnemy;
+            _mover = entity.GetCompo<EntityMover>();
             _animTrigger = _enemy.GetCompo<EnemyAnimationTrigger>();
-            _mover = _enemy.GetCompo<EntityMover>();
         }
+
 
         public override void Enter()
         {
             base.Enter();
             _animTrigger.IsVelocityChange = false;
-            _enemy.lastAttackTime = Time.time;
-            _enemy.Attack();
             _mover.StopImmediately();
             _animTrigger.OnAnimationEndTrigger += ChangeState;
+
+            DOVirtual.DelayedCall(0.6f, () =>
+            {
+                _enemy.Attack();
+            });
         }
 
-        public override void Exit()
-        {
-            base.Exit();
-            _animTrigger.OnAnimationEndTrigger -= ChangeState;
-        }
         private void ChangeState()
         {
             if (_enemy.AttackRangeInPlayer())
@@ -49,3 +47,4 @@ namespace MGMG.FSM
         }
     }
 }
+
