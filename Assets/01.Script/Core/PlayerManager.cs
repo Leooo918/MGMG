@@ -1,12 +1,11 @@
 ﻿using MGMG.Entities;
+using System;
 using UnityEngine;
 
 namespace MGMG.Core
 {
     public class PlayerManager : MonoSingleton<PlayerManager>
     {
-        public int EnemyKillCount { get; set; }
-
         private Player _player;
         public Player Player
         {
@@ -21,10 +20,35 @@ namespace MGMG.Core
                 return _player;
             }
         }
+        public int CurrentPlayerLevel { get; private set; } = 1;
+        public event Action<int> OnChangedPlayerLevelEvent;
+        public int CurrentExp { get; private set; } = 0;
+        public event Action<int> OnExpChangedEvent;
+        public int MaxExp { get; private set; } = 100;
+        public int EnemyKillCount { get; set; }
+
 
         public void AddKillCount()
         {
             EnemyKillCount++;
+            AddExp(20);
+        }
+
+        private void LevelUp()
+        {
+            CurrentPlayerLevel++;
+            OnChangedPlayerLevelEvent?.Invoke(CurrentPlayerLevel);
+            MaxExp += (int)(MathF.Log(2, CurrentPlayerLevel) * 100);
+        }
+        public void AddExp(int exp)
+        {
+            CurrentExp += exp;
+            if (CurrentExp > MaxExp)
+            {
+                CurrentExp -= MaxExp;
+                LevelUp();
+            }
+            OnExpChangedEvent?.Invoke(CurrentExp);
         }
     }
 }

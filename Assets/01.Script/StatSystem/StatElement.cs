@@ -74,10 +74,8 @@ namespace MGMG.StatSystem
         private Dictionary<EModifyLayer, Dictionary<string, StatModifier>> _modifiers;
 
         public event Action<float, float> OnValueChanged;
-        public event Action<int, int> OnIntValueChanged;
 
         public float Value { get; private set; }
-        public int IntValue { get; private set; }
 
         private bool _isUseClamp;
         private bool _isUseModifier;
@@ -86,6 +84,8 @@ namespace MGMG.StatSystem
         {
             _isUseClamp = isUseClamp;
             _isUseModifier = isUseModifier;
+            
+            _baseValue = float.Parse(_valueString);
 
             SetDictionary();
             SetValue();
@@ -132,10 +132,8 @@ namespace MGMG.StatSystem
             int intValue = Mathf.CeilToInt(value);
 
             if (Value != value) OnValueChanged?.Invoke(Value, value);
-            if (IntValue != intValue) OnIntValueChanged?.Invoke(IntValue, intValue);
 
             Value = value;
-            IntValue = intValue;
         }
 
         public void AddModify(string key, float value, EModifyMode eModifyMode, EModifyLayer eModifyLayer, bool canValueOverlap = true)

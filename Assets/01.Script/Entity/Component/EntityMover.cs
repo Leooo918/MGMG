@@ -14,11 +14,11 @@ namespace MGMG.Entities.Component
         public Vector2 Velocity => _rbCompo.linearVelocity;
         public Vector2 VisualVelocity => _lockVisualVelocity && _lastVelocity.sqrMagnitude > 0.0001f ? _lastVelocity : _rbCompo.linearVelocity;
 
-        [SerializeField] private float _speed;
         private Rigidbody2D _rbCompo;
         private Entity _entity;
         private EntityRenderer _renderer;
         private EntityStat _statCompo;
+        private StatElement _speedStat;
 
         public void Initialize(Entity entity)
         {
@@ -28,8 +28,10 @@ namespace MGMG.Entities.Component
             _statCompo = entity.GetCompo<EntityStat>();
         }
 
-        public void AfterInit() { }
-
+        public void AfterInit()
+        {
+            _speedStat = _statCompo.StatDictionary["Speed"];
+        }
         public void AddForceToEntity(Vector2 force, ForceMode2D mode = ForceMode2D.Impulse)
         {
             _rbCompo.AddForce(force, mode);
@@ -54,9 +56,9 @@ namespace MGMG.Entities.Component
         private void MoveCharacter()
         {
             if (_movement.sqrMagnitude > 0.0001f)
-                _lastVelocity = _movement * _speed;
+                _lastVelocity = _movement * _speedStat.Value;
 
-            _rbCompo.linearVelocity = _movement * _speed;
+            _rbCompo.linearVelocity = _movement * _speedStat.Value;
         }
 
         public void SetLockVisualVelocity(bool value) => _lockVisualVelocity = value;

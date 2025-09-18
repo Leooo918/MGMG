@@ -68,10 +68,11 @@ namespace MGMG.Entities
             _health = GetCompo<EntityHealth>();
             _health.OnDieEvent += HandleDieEvent;
 
-            _reproductionStat = GetCompo<EntityStat>().StatDictionary["Reproduction"];
-            _damageStat = GetCompo<EntityStat>().StatDictionary["Damage"];
+            _damageStat = GetCompo<EntityStat>().StatDictionary["AttackPower"];
             _healthStat = GetCompo<EntityStat>().StatDictionary["Health"];
             _critical = GetCompo<EntityStat>().StatDictionary["Critical"];
+
+            Debug.Log(_damageStat.Value);
         }
 
         private void HandleDieEvent()

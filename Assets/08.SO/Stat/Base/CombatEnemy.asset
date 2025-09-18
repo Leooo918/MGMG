@@ -15,22 +15,16 @@ MonoBehaviour:
   _statElements:
   - Name: Health
     elementSO: {fileID: 11400000, guid: 079c489854ed9494ca195d45b1990ba4, type: 2}
-    _valueString: 100
+    _valueString: 250
   - Name: Defense
     elementSO: {fileID: 11400000, guid: 16b59fa4a54ff82468c3b95af8a56917, type: 2}
-    _valueString: 10
+    _valueString: 20
   - Name: AttackPower
     elementSO: {fileID: 11400000, guid: 066e1e8ac736f0c4aae04c15e2ef3f79, type: 2}
-    _valueString: 20
+    _valueString: 30
   - Name: AttackSpeed
     elementSO: {fileID: 11400000, guid: 1549c3f67b279454ca2554ef67f8c38f, type: 2}
     _valueString: 1
   - Name: Speed
     elementSO: {fileID: 11400000, guid: b4e49fb8dbd65e64aa94c2ac41d01cdb, type: 2}
-    _valueString: 10
-  - Name: Critical
-    elementSO: {fileID: 11400000, guid: 5c5e50a6824045f4ab583ef291adc533, type: 2}
-    _valueString: 25
-  - Name: CriticalDamage
-    elementSO: {fileID: 11400000, guid: 1a5c2d29449116f468133ff9fcfe3171, type: 2}
-    _valueString: 150
+    _valueString: 7
