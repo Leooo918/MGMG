@@ -1,4 +1,5 @@
 using MGMG.Core.ObjectPooling;
+using MGMG.Entities;
 using UnityEngine;
 
 namespace MGMG.Magic
@@ -6,10 +7,12 @@ namespace MGMG.Magic
     public class CycloneBladeMagic : PlayerMagic
     {
         protected CycloneBladeMagicData _cycloneBladeMagicData => _magicData as CycloneBladeMagicData;
+
         public override void OnUseSkill()
         {
-            CycloneBlade blade =  (CycloneBlade)PoolManager.Instance.Pop(SkillPoolingType.CycloneBlade);
-            blade.Initialize(_cycloneBladeMagicData.bladeCountPerLevel[CurrentLevel]);
+            int damage = Mathf.RoundToInt(_attackStat.IntValue * _cycloneBladeMagicData.damagePerLevel[CurrentLevel]);
+            CycloneBlade blade = (CycloneBlade)PoolManager.Instance.Pop(SkillPoolingType.CycloneBlade);
+            blade.Initialize(_owner, damage, _cycloneBladeMagicData.bladeCountPerLevel[CurrentLevel]);
             blade.transform.SetParent(_owner.transform);
             blade.transform.localPosition = Vector3.zero;
         }
@@ -23,5 +26,6 @@ namespace MGMG.Magic
     public class CycloneBladeMagicData : MagicData
     {
         public int[] bladeCountPerLevel;
+        public int[] damagePerLevel;
     }
 }

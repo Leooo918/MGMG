@@ -1,58 +1,69 @@
 using MGMG.Core.ObjectPooling;
 using MGMG.Enemies;
+using MGMG.Entities;
 using MGMG.Entities.Component;
 using System;
 using UnityEngine;
 
 public class IceLink : MonoBehaviour, IPoolable
 {
-    private bool _isCheckLifeTime = false;
-    private float _decreaseValue = 0;
+    [SerializeField] private float _originRange;
+    [SerializeField] private LayerMask _layerMask;
+
+    private int _damage;
+    private float _range;
+    private Entity _owner;
     private float _lifeTime;
+
+    private float _tickDelay = 0.1f;
+    private float _prevTick;
+
+    private Collider2D[] _collider;
+
     public GameObject GameObject => gameObject;
     public Enum PoolEnum => SkillPoolingType.IceLink;
 
-    public void Initialize(float range, float decreaseValue, float lifeTime)
+
+    public void Initialize(Entity owner, int damage, float range, float lifeTime)
     {
-        _isCheckLifeTime = true;
-        _decreaseValue = decreaseValue;
-        _lifeTime = Time.time + lifeTime;
+        _owner = owner;
+        _damage = damage;
+        _range = _originRange * range;
         transform.localScale = Vector3.one * range;
+        _lifeTime = Time.time + lifeTime;
     }
 
     private void Update()
     {
-        if (_isCheckLifeTime && Time.time > _lifeTime)
+        if (_lifeTime > Time.time)
         {
-            _isCheckLifeTime = false;
             PoolManager.Instance.Push(this);
+            return;
         }
-    }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        //적 들어오면 이동 속도 감소
-        if (collision.gameObject.TryGetComponent(out Enemy enemy))
+        if (_prevTick + _tickDelay > Time.time)
         {
-            EntityStat stat = enemy.GetCompo<EntityStat>();
-            //stat._overrideStatElementList
+            _prevTick = Time.time;
+
+            ContactFilter2D contactFilter = new ContactFilter2D();
+            contactFilter.SetLayerMask(_layerMask);
+
+            int count = Physics2D.OverlapCircle(transform.position, _range, contactFilter, _collider);
+            for (int i = 0; i < count; i++)
+            {
+                if (_collider[i].TryGetComponent(out Enemy enemy))
+                {
+                    enemy.GetCompo<EntityHealth>().ApplyDamage(_owner.GetCompo<EntityStat>(), _damage);
+                }
+            }
         }
-    }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        //적 나가면 이동 속도 다시 증가
-        if (collision.gameObject.TryGetComponent(out Enemy enemy))
-        {
-            EntityStat stat = enemy.GetCompo<EntityStat>();
-            //stat._overrideStatElementList
-        }
+
     }
 
     public void OnPop()
     {
 
     }
-
     public void OnPush()
     {
 

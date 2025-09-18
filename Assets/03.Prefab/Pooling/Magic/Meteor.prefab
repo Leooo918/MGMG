@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 6188162808648080552}
   - component: {fileID: 550719763682957349}
   m_Layer: 0
-  m_Name: Mateor
+  m_Name: Meteor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -133,9 +133,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abb7bd0ee412cc1439d7a6c6e0741673, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _minSpawnRange: 2
-  _maxSpawnRange: 7
+  _whatIsEnemy:
+    serializedVersion: 2
+    m_Bits: 128
   _meteorTrm: {fileID: 4324399692482064398}
+  _detectRange: 2
 --- !u!1 &6810953651702574310
 GameObject:
   m_ObjectHideFlags: 0

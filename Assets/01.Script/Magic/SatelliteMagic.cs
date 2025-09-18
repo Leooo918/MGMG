@@ -1,6 +1,7 @@
 using MGMG.Core.ObjectPooling;
 using MGMG.Entities;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,6 +11,7 @@ namespace MGMG.Magic
     {
         private List<Satellite> _satelliteList;
         private Dictionary<Satellite, float> _rotationDictionary;
+        private float _speedUpValue = 1.0f;
         private float _rotation;
 
         private SatelliteMagicData _satelliteData => _magicData as SatelliteMagicData;
@@ -33,7 +35,7 @@ namespace MGMG.Magic
         {
             foreach (var satellite in _satelliteList)
             {
-                float rotation = _rotationDictionary[satellite] + (_satelliteData.satelliteRotateSpeed * Time.deltaTime);
+                float rotation = _rotationDictionary[satellite] + (_satelliteData.satelliteRotateSpeed * _speedUpValue * Time.deltaTime);
                 _rotationDictionary[satellite] = rotation;
                 satellite.SetRotation(rotation);
             }
@@ -42,15 +44,29 @@ namespace MGMG.Magic
         // 일정 시간 마다 자동으로 사용됨
         public override void OnUseSkill()
         {
+            _owner.StartCoroutine(UseSkillRoutine());
+        }
 
+        private IEnumerator UseSkillRoutine()
+        {
+            _speedUpValue = _satelliteData.satelliteSpeedUpValue;
+            yield return new WaitForSeconds(_satelliteData.satelliteSpeedUpDuration);
+            _speedUpValue = 1.0f;
         }
 
         public override void OnLevelUp()
         {
             base.OnLevelUp();
             SetSatellite();
+            SetSatelliteDamage();
         }
 
+
+        private void SetSatelliteDamage()
+        {
+            int damage = Mathf.RoundToInt(_attackStat.IntValue * _satelliteData.satelliteDamagePerLevel[CurrentLevel]);
+            _satelliteList.ForEach(satellite => satellite.SetDamage(damage));
+        }
         private void SetSatellite()
         {
             int satelliteCount = _satelliteData.satelliteCountPerLevel[CurrentLevel];
@@ -78,6 +94,11 @@ namespace MGMG.Magic
                 }
             }
 
+            SetSatelliteRotation(satelliteCount);
+        }
+
+        private void SetSatelliteRotation(int satelliteCount)
+        {
             if (satelliteCount != 0)
             {
                 float interval = 360 / satelliteCount;
@@ -88,7 +109,9 @@ namespace MGMG.Magic
 
                     if (_rotationDictionary.ContainsKey(_satelliteList[i]))
                     {
+
                         _rotationDictionary[_satelliteList[i]] = (interval * i);
+
                     }
                     else
                     {
@@ -97,8 +120,6 @@ namespace MGMG.Magic
                 }
             }
         }
-
-
 
         #region Getter
 
@@ -114,9 +135,11 @@ namespace MGMG.Magic
     [Serializable]
     public class SatelliteMagicData : MagicData
     {
+        public int[] satelliteCountPerLevel;
+        public float[] satelliteDamagePerLevel;
         public float satelliteDistance;
         public float satelliteRotateSpeed;
-        public int[] satelliteCountPerLevel;
-        public int[] satelliteDamagePerLevel;
+        public float satelliteSpeedUpValue;
+        public float satelliteSpeedUpDuration;
     }
 }

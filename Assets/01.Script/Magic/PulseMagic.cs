@@ -1,7 +1,6 @@
-using MGMG.Core.ObjectPooling;
 using MGMG.Enemies;
+using MGMG.Entities.Component;
 using UnityEngine;
-using static UnityEngine.RuleTile.TilingRuleOutput;
 
 namespace MGMG.Magic
 {
@@ -10,7 +9,7 @@ namespace MGMG.Magic
         private Collider2D[] _collider = new Collider2D[10];
 
         protected PulseMagicData _pulseMagicData => _magicData as PulseMagicData;
-        
+
         public override void OnUseSkill()
         {
             //이펙트 재생
@@ -25,6 +24,11 @@ namespace MGMG.Magic
                 if (_collider[i].TryGetComponent(out Enemy enemy))
                 {
                     //넉백, 데미지 주기
+                    Vector2 force = (enemy.transform.position - _owner.transform.position).normalized * _pulseMagicData._knockBackPowerPerLevel[CurrentLevel];
+                    int damage = Mathf.RoundToInt(_attackStat.IntValue * _pulseMagicData._damagePerLevel[CurrentLevel]);
+
+                    enemy.GetCompo<EntityMover>().AddForceToEntity(force);
+                    enemy.GetCompo<EntityHealth>().ApplyDamage(_stat, damage);
                 }
             }
         }
@@ -35,7 +39,7 @@ namespace MGMG.Magic
         }
     }
 
-    public class PulseMagicData: MagicData
+    public class PulseMagicData : MagicData
     {
         public LayerMask _whatIsEnemy;
         public float[] _damagePerLevel;

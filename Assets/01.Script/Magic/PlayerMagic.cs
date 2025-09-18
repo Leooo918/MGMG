@@ -1,4 +1,6 @@
 using MGMG.Entities;
+using MGMG.Entities.Component;
+using MGMG.StatSystem;
 using System;
 using UnityEngine;
 
@@ -7,7 +9,10 @@ namespace MGMG.Magic
     public abstract class PlayerMagic
     {
         protected Entity _owner;
+        protected EntityStat _stat;
+        protected StatElement _attackStat;
         protected MagicData _magicData;
+
         protected int _currentLevel = 0;
 
         public int CurrentLevel => _currentLevel;
@@ -15,6 +20,8 @@ namespace MGMG.Magic
         public virtual void Initialize(Entity owner, MagicData magicData)
         {
             _owner = owner;
+            _stat = _owner.GetCompo<EntityStat>();
+            _attackStat = _stat.StatDictionary[_magicData.attackStat];
             _magicData = magicData;
         }
 
@@ -37,8 +44,9 @@ namespace MGMG.Magic
         public string description;
         public Sprite icon;
         public EMagicSchool magicSchool;
-        [Space]
         public int maxLevel;
+        public StatElementSO attackStat;
+        [Space]
         public int[] coolDownPerLevel;
     }
 }

@@ -31,9 +31,11 @@ MonoBehaviour:
         icon: {fileID: 0}
         magicSchool: 1
         maxLevel: 5
+        attackStat: {fileID: 11400000, guid: 066e1e8ac736f0c4aae04c15e2ef3f79, type: 2}
         coolDownPerLevel: 0500000004000000030000000200000001000000
         range: 7
         whatIsEnemy:
           serializedVersion: 2
           m_Bits: 128
-        levelPerMagicCount: 
+        magicCountPerLevel: 
+        damagePerLevel: []

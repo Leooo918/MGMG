@@ -31,6 +31,7 @@ MonoBehaviour:
         icon: {fileID: 0}
         magicSchool: 2
         maxLevel: 5
+        attackStat: {fileID: 11400000, guid: 066e1e8ac736f0c4aae04c15e2ef3f79, type: 2}
         coolDownPerLevel: 0900000009000000090000000800000008000000
         countPerLevel: 0100000001000000020000000200000003000000
         rangePerLevel:

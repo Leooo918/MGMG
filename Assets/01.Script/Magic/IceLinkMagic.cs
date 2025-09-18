@@ -10,10 +10,12 @@ namespace MGMG.Magic
         public override void OnUseSkill()
         {
             base.OnUseSkill();
+            int damage = Mathf.RoundToInt(_attackStat.IntValue * _iceLinkMagic.damagePerLevel[CurrentLevel]);
+
             IceLink iceLink = (IceLink)PoolManager.Instance.Pop(SkillPoolingType.IceLink);
             iceLink.transform.SetParent(_owner.transform);
             iceLink.transform.localPosition = Vector3.zero;
-            iceLink.Initialize(_iceLinkMagic.levelPerRange[CurrentLevel], _iceLinkMagic.speedDownValue, _iceLinkMagic.levelPerLifetime[CurrentLevel]);
+            iceLink.Initialize(_owner, damage, _iceLinkMagic.rangePerLevel[CurrentLevel], _iceLinkMagic.lifeTimePerLevel[CurrentLevel]);
         }
 
         public override PlayerMagic GetInstance() => new IceLinkMagic();
@@ -21,9 +23,9 @@ namespace MGMG.Magic
 
     public class IceLinkMagicData : MagicData
     {
-        public float[] levelPerRange;
-        public float[] levelPerLifetime;
-        public float speedDownValue;
+        public float[] rangePerLevel;
+        public float[] damagePerLevel;
+        public float[] lifeTimePerLevel;
     }
 }
 

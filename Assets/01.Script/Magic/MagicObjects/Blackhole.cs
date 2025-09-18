@@ -1,5 +1,7 @@
 using MGMG.Core.ObjectPooling;
 using MGMG.Enemies;
+using MGMG.Entities;
+using MGMG.Entities.Component;
 using System;
 using UnityEngine;
 
@@ -9,14 +11,18 @@ public class Blackhole : MonoBehaviour, IPoolable
     private float _lifeTime = 0;
     private Collider2D[] _collider = new Collider2D[20];
     private float _gravity;
+    private int _damage;
+    private Entity _entity;
     public GameObject GameObject => gameObject;
     public Enum PoolEnum => SkillPoolingType.Blackhole;
 
-    public void Initialize(float gravity, float scale, float lifeTime)
+    public void Initialize(Entity entity, int damage, float gravity, float scale, float lifeTime)
     {
+        _entity = entity;
         transform.localScale = Vector3.one * scale;
         _lifeTime = Time.time + lifeTime;  
         _gravity = gravity;
+        _damage = damage;
     }
 
     protected void Update()
@@ -30,7 +36,9 @@ public class Blackhole : MonoBehaviour, IPoolable
             if(_collider[i].TryGetComponent(out Enemy enemy))
             {
                 // 뭔가 거리에 따라서 땡기기
-
+                Vector2 direction = (enemy.transform.position - transform.position).normalized * Time.deltaTime;
+                enemy.GetCompo<EntityMover>().AddForceToEntity(direction);
+                enemy.GetCompo<EntityHealth>().ApplyDamage(_entity.GetCompo<EntityStat>(), _damage);
             }
         }
         if(_lifeTime < Time.time)

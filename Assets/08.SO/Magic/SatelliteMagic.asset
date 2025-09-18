@@ -31,8 +31,16 @@ MonoBehaviour:
         icon: {fileID: 0}
         magicSchool: 0
         maxLevel: 5
+        attackStat: {fileID: 11400000, guid: 066e1e8ac736f0c4aae04c15e2ef3f79, type: 2}
         coolDownPerLevel: 0500000004000000030000000200000001000000
-        satelliteDistance: 3
-        satelliteRotateSpeed: 360
         satelliteCountPerLevel: 0300000003000000040000000400000005000000
-        satelliteDamagePerLevel: 0200000003000000040000000500000006000000
+        satelliteDamagePerLevel:
+        - 1.5
+        - 1.6
+        - 1.7
+        - 1.8
+        - 2
+        satelliteDistance: 2
+        satelliteRotateSpeed: 180
+        satelliteSpeedUpValue: 4
+        satelliteSpeedUpDuration: 1

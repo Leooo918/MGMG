@@ -1,5 +1,7 @@
 using MGMG.Core.ObjectPooling;
 using MGMG.Enemies;
+using MGMG.Entities;
+using MGMG.Entities.Component;
 using MGMG.Magic;
 using System;
 using UnityEngine;
@@ -9,17 +11,19 @@ public class Lava : MonoBehaviour, IPoolable
     [SerializeField] private LayerMask _whatIsEnemy;
     private Collider2D[] _collider = new Collider2D[5];
 
+    private int _damage;
     private float _range;
-    private float _damage;
     private float _lifeTime;
     private float _tickDelay = 0.1f;
     private float _prevTick;
+    private Entity _owner;
 
     public GameObject GameObject => gameObject;
     public Enum PoolEnum => SkillPoolingType.Lava;
 
-    public void Initialize(float range, float lifeTime, float tickDamage)
+    public void Initialize(Entity owner, float range, float lifeTime, int tickDamage)
     {
+        _owner = owner;
         _range = range;
         transform.localScale = Vector3.one * range;
         _lifeTime = Time.time + lifeTime;
@@ -45,6 +49,7 @@ public class Lava : MonoBehaviour, IPoolable
             {
                 if (_collider[i].TryGetComponent(out Enemy enemy))
                 {
+                    enemy.GetCompo<EntityHealth>().ApplyDamage(_owner.GetCompo<EntityStat>(), _damage);
                     //데미지 넣기
                 }
             }

@@ -14,13 +14,14 @@ namespace MGMG.Magic
             ContactFilter2D contactFilter = new ContactFilter2D();
             contactFilter.SetLayerMask(_icicleBulletData.whatIsEnemy);
             int count = Physics2D.OverlapCircle(_owner.transform.position, _icicleBulletData.detectRange, contactFilter, _collider);
-            Debug.Log(count);
+            int damage = Mathf.RoundToInt(_attackStat.IntValue * _icicleBulletData.damagePerLevel[CurrentLevel]);
+
             if (count > 0)
             {
                 IcicleBullet bullet = (IcicleBullet)PoolManager.Instance.Pop(SkillPoolingType.IcicleBullet);
                 bullet.transform.position = _owner.transform.position;
                 bullet.transform.up = (_collider[0].transform.position - _owner.transform.position).normalized;
-                bullet.Initialize(_icicleBulletData.bulletSpeed, _icicleBulletData.damagePerLevel[CurrentLevel], _icicleBulletData.explosionRange);
+                bullet.Initialize(_owner, _icicleBulletData.bulletSpeed, damage, _icicleBulletData.explosionRange);
             }
         }
 

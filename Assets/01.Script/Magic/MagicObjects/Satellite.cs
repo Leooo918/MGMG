@@ -6,9 +6,11 @@ namespace MGMG.Magic
 {
     public class Satellite : MonoBehaviour, IPoolable
     {
-        private int _damage;
         [SerializeField] private float _satelliteDistance = 5.0f;
         [SerializeField] private Transform _satelliteTrm;
+        [SerializeField] private CrashDamageCaster _crashCheck;
+        [SerializeField] private Collider2D _collider;
+        private int _damage;
 
         public GameObject GameObject => gameObject;
         public Enum PoolEnum => _poolingType;
@@ -17,6 +19,7 @@ namespace MGMG.Magic
         public void SetDistance(float distance)
         {
             _satelliteDistance = distance;
+            _collider.offset = new Vector2(0, distance);
             _satelliteTrm.transform.localPosition = Vector3.up * distance;
         }
         public void SetRotation(float rotation)
@@ -28,7 +31,7 @@ namespace MGMG.Magic
         public void SetDamage(int damage)
         {
             _damage = damage;
-            //데미지 넣는 부분 막 뭐 해
+            _crashCheck.SetDamage(_damage);
         }
 
         public void OnSpawned()

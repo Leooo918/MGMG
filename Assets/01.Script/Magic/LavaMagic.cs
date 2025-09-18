@@ -19,7 +19,9 @@ namespace MGMG.Magic
                 //ÀÌÆåÆ® Àç»ý
                 Lava lava = (Lava)PoolManager.Instance.Pop(SkillPoolingType.Lava);
                 lava.transform.position = lavaPos;
-                lava.Initialize(_lavaMagicData.rangePerLevel[CurrentLevel], _lavaMagicData.lifeTimePerLevel[CurrentLevel], _lavaMagicData.damagePerLevel[CurrentLevel]);
+
+                int damage = Mathf.RoundToInt(_attackStat.IntValue * _lavaMagicData.damagePerLevel[CurrentLevel]);
+                lava.Initialize(_owner, _lavaMagicData.rangePerLevel[CurrentLevel], _lavaMagicData.lifeTimePerLevel[CurrentLevel], damage);
             }
         }
 
