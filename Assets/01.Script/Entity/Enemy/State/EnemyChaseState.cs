@@ -9,23 +9,23 @@ namespace MGMG.FSM
     public class EnemyChaseState : EntityState
     {
         private Enemy _enemy;
-
         private EntityMover _mover;
         private EntityStat _statCompo;
-
+        private EnemyAnimationTrigger _animTrigger;
 
         public EnemyChaseState(Entity entity, AnimParamSO animParam) : base(entity, animParam)
         {
             _enemy = entity as Enemy;
+            _mover = _enemy.GetCompo<EntityMover>();
+            _statCompo = _enemy.GetCompo<EntityStat>();
+            _animTrigger = _enemy.GetCompo<EnemyAnimationTrigger>();
         }
 
         public override void Enter()
         {
             base.Enter();
-            _mover = _enemy.GetCompo<EntityMover>();
-            _statCompo = _enemy.GetCompo<EntityStat>();
-
-            _mover.LockVisualVelocity = false;
+            _animTrigger.IsVelocityChange = true;
+            _mover.SetLockVisualVelocity(false);
         }
 
         public override void Update()

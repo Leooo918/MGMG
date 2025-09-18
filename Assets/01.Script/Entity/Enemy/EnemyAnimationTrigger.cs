@@ -10,8 +10,10 @@ namespace MGMG.Entities.Component
         private Enemy _enemy;
         private EntityMover _mover;
         private EntityRenderer _renderer;
+        
         [SerializeField] private AnimParamSO _xAnimParam, _yAnimParam;
 
+        public bool IsVelocityChange { get; set; }
         public override void Initialize(Entity entity)
         {
             base.Initialize(entity);
@@ -22,10 +24,10 @@ namespace MGMG.Entities.Component
 
         private void Update()
         {
-            Vector2 enemyVelocity = _mover.VisualVelocity.normalized;
-
-            _renderer.SetParam(_xAnimParam, enemyVelocity.x);
-            _renderer.SetParam(_yAnimParam, enemyVelocity.y);
+            if(!IsVelocityChange) return;
+            Vector2 playerdir = _enemy.PlayerDirection().normalized;
+            _renderer.SetParam(_xAnimParam, playerdir.x);
+            _renderer.SetParam(_yAnimParam, playerdir.y);
         }
     }
 }

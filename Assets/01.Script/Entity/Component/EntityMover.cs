@@ -8,57 +8,37 @@ namespace MGMG.Entities.Component
     public class EntityMover : MonoBehaviour, IEntityComponent, IAfterInitable
     {
         private Vector2 _movement;
-        private Vector2 _lastVelocity;   
-        private bool _lockVisualVelocity;
+        private Vector2 _lastVelocity;
+        private bool _lockVisualVelocity = false;
 
         public Vector2 Velocity => _rbCompo.linearVelocity;
-
-        public Vector2 VisualVelocity
-            => _lockVisualVelocity
-               ? (_lastVelocity.sqrMagnitude > 0.001f ? _lastVelocity : _rbCompo.linearVelocity)
-               : _rbCompo.linearVelocity;
-
-        public bool LockVisualVelocity
-        {
-            get => _lockVisualVelocity;
-            set => _lockVisualVelocity = value;
-        }
-        public bool CanManualMove { get; set; } = true; 
-        
-        public float SpeedMultiplier { get; set; } = 1f;
+        public Vector2 VisualVelocity => _lockVisualVelocity && _lastVelocity.sqrMagnitude > 0.0001f ? _lastVelocity : _rbCompo.linearVelocity;
 
         [SerializeField] private float _speed;
         private Rigidbody2D _rbCompo;
         private Entity _entity;
         private EntityRenderer _renderer;
         private EntityStat _statCompo;
-        private StatElement _speedStat;
-
-        public bool IsStopped { get; set; } = false;
-        private Collider2D _collider;
 
         public void Initialize(Entity entity)
         {
             _entity = entity;
             _rbCompo = entity.GetComponent<Rigidbody2D>();
-            _collider = entity.GetComponent<Collider2D>();
             _renderer = entity.GetCompo<EntityRenderer>();
             _statCompo = entity.GetCompo<EntityStat>();
         }
 
-        public void AfterInit()
-        {
-        }
+        public void AfterInit() { }
 
         public void AddForceToEntity(Vector2 force, ForceMode2D mode = ForceMode2D.Impulse)
         {
             _rbCompo.AddForce(force, mode);
         }
 
-        public void StopImmediately(bool preserveForVisual = true)
+        public void StopImmediately(bool visualPreserve = true)
         {
-            if (preserveForVisual)
-                _lastVelocity = _rbCompo.linearVelocity; 
+            if (visualPreserve)
+                _lastVelocity = _rbCompo.linearVelocity;
 
             _rbCompo.linearVelocity = Vector2.zero;
             _movement = Vector2.zero;
@@ -71,23 +51,17 @@ namespace MGMG.Entities.Component
             MoveCharacter();
         }
 
-
-
         private void MoveCharacter()
         {
-            if (CanManualMove)
-            {
-                _rbCompo.linearVelocity = _movement * _speed;
+            if (_movement.sqrMagnitude > 0.0001f)
+                _lastVelocity = _movement * _speed;
 
-                if (_rbCompo.linearVelocity.sqrMagnitude > 0.001f)
-                    _lastVelocity = _rbCompo.linearVelocity;
-            }
+            _rbCompo.linearVelocity = _movement * _speed;
         }
 
-        public void Dispose()
-        {
+        public void SetLockVisualVelocity(bool value) => _lockVisualVelocity = value;
 
-        }
+        public void Dispose() { }
     }
 
 }

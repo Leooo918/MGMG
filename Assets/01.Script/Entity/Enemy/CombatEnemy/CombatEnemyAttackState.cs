@@ -24,10 +24,8 @@ namespace MGMG.FSM
         public override void Enter()
         {
             base.Enter();
-
+            _animTrigger.IsVelocityChange = false;
             _enemy.lastAttackTime = Time.time;
-
-
             _enemy.Attack();
             _mover.StopImmediately();
             _animTrigger.OnAnimationEndTrigger += ChangeState;
@@ -40,7 +38,14 @@ namespace MGMG.FSM
         }
         private void ChangeState()
         {
-            _enemy.ChangeState(_enemy.enemyFSM[FSMState.Chase]);
+            if (_enemy.AttackRangeInPlayer())
+            {
+                _enemy.ChangeState(_enemy.enemyFSM[FSMState.Idle]);
+            }
+            else
+            {
+                _enemy.ChangeState(_enemy.enemyFSM[FSMState.Chase]);
+            }
         }
     }
 }

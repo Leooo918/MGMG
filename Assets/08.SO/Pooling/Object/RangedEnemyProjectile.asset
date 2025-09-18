@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: RangedEnemyProjectile
   m_EditorClassIdentifier: 
   poolCount: 10
-  prefab: {fileID: 0}
+  prefab: {fileID: 5477538640436143442, guid: da69c7af37f37ee429f62abec99b2455, type: 3}

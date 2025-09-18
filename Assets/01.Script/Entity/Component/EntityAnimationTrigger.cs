@@ -14,5 +14,6 @@ namespace MGMG.Entities.Component
             _entity = entity;
         }
         protected virtual void AnimationEnd() => OnAnimationEndTrigger?.Invoke();
+
     }
 }

@@ -10,20 +10,20 @@ namespace MGMG.FSM
     {
         private Enemy _enemy;
         private EntityMover _mover;
+        private EnemyAnimationTrigger _animTrigger;
+
         public EnemyIdleState(Entity entity, AnimParamSO animParam) : base(entity, animParam)
         {
             _enemy = entity as Enemy;
+            _animTrigger = _enemy.GetCompo<EnemyAnimationTrigger>();
             _mover = _enemy.GetCompo<EntityMover>();
         }
 
         public override void Enter()
         {
             base.Enter();
+            _animTrigger.IsVelocityChange = false;
             _mover = _enemy.GetCompo<EntityMover>();
-
-            _mover.LockVisualVelocity = true;
-
-            _mover.StopImmediately(true);
         }
 
         public override void Update()
@@ -33,9 +33,7 @@ namespace MGMG.FSM
             if (_enemy.AttackRangeInPlayer())
             {
                 if (_enemy.lastAttackTime + _enemy.attackCooldownStat.Value < Time.time)
-                {
                     _enemy.ChangeState(_enemy.enemyFSM[FSMState.Attack]);
-                }
             }
             else
             {
