@@ -97,6 +97,14 @@ namespace MGMG.Core
             #endregion
         }
 
+        private void Update()
+        {
+            if(UnityEngine.Input.GetKeyDown(KeyCode.K))
+            {
+                ShowSelectPanel();
+            }
+        }
+
         public void GetMagic(Sprite sprite)
         {
             if (_magicCurrentIndex < _magicImages.Length)
