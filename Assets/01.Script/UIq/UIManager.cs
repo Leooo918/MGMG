@@ -33,6 +33,7 @@ namespace MGMG.Core
 
         private void Start()
         {
+            #region get magic panel child
             Transform magicPanel = _canvas.transform.Find("MagicPanel");
 
             if (magicPanel != null)
@@ -51,7 +52,9 @@ namespace MGMG.Core
 
                 _magicImages = magicList.ToArray();
             }
+            #endregion
 
+            #region get card panel child
             Transform cardPanel = _canvas.transform.Find("CardPanel");
 
             if (cardPanel != null)
@@ -70,6 +73,28 @@ namespace MGMG.Core
 
                 _cardImages = cardList.ToArray();
             }
+            #endregion
+
+            #region get select panel child
+            Transform selectPanel = _canvas.transform.Find("SelectPanel");
+
+            if(selectPanel != null)
+            {
+                List<Image> selectableImageList = new List<Image>();
+
+                foreach(Transform child in selectPanel)
+                {
+                    if(child.name.Contains("SelectCardImage"))
+                    {
+                        Image img = child.GetComponent<Image>();
+                        if(img != null)
+                            selectableImageList.Add(img);
+                    }
+                }
+
+
+            }
+            #endregion
         }
 
         public void GetMagic(Sprite sprite)
@@ -90,11 +115,6 @@ namespace MGMG.Core
             }
         }
 
-        public void ImvisibleImage()
-        {
-
-        }
-
         public void HpApply(int damage)
         {
             //_hpSlider.value += damage;
@@ -102,12 +122,30 @@ namespace MGMG.Core
 
         public void XpApply(int value)
         {
-            _xpSlider.value += value;
+            float prevValue = _xpSlider.value;
+            float maxValue = _xpSlider.maxValue;
 
-            //if (_xpSlider.value >= _xpSlider.maxValue)
-            //{
-            //    _xpSlider.value = 0;
-            //}
+            float targetValue = prevValue + value;
+
+            if (targetValue >= maxValue)
+            {
+                float remainingXp = targetValue - maxValue;
+
+                _xpSlider.maxValue *= 1.1f;
+
+                DOTween.To(() => _xpSlider.value, x => _xpSlider.value = x, maxValue, 0.3f)
+                    .SetEase(Ease.OutCirc)
+                    .OnComplete(() =>
+                    {
+                        DOTween.To(() => _xpSlider.value, x => _xpSlider.value = x, remainingXp, 0.3f)
+                        .SetEase(Ease.OutCirc);
+                    });
+            }
+            else
+            {
+                DOTween.To(() => _xpSlider.value, x => _xpSlider.value = x, targetValue, 0.3f)
+                    .SetEase(Ease.OutCirc);
+            }
         }
 
         public void ShowSelectPanel()
