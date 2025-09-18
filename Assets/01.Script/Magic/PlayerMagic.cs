@@ -7,6 +7,7 @@ namespace MGMG.Magic
     public abstract class PlayerMagic
     {
         protected Entity _owner;
+        protected MagicData _magicData;
         protected int _currentLevel = 0;
 
         public int CurrentLevel => _currentLevel;
@@ -14,14 +15,18 @@ namespace MGMG.Magic
         public virtual void Initialize(Entity owner, MagicData magicData)
         {
             _owner = owner;
-
+            _magicData = magicData;
         }
-        
-        public virtual void OnLevelUp() { _currentLevel++; }
-        public virtual void OnUpdate() {  }
-        public virtual void OnUseSkill() {  }
 
-        public abstract float GetCoolTime();
+        public virtual void OnLevelUp()
+        {
+            if ((_magicData.maxLevel - 1) <= _currentLevel) return;
+            _currentLevel++;
+        }
+        public virtual void OnUpdate() { }
+        public virtual void OnUseSkill() { }
+
+        public virtual float GetCoolTime() => _magicData.coolDownPerLevel[CurrentLevel];
         public abstract PlayerMagic GetInstance();
     }
 
@@ -32,6 +37,8 @@ namespace MGMG.Magic
         public string description;
         public Sprite icon;
         public EMagicSchool magicSchool;
+        [Space]
+        public int maxLevel;
         public int[] coolDownPerLevel;
     }
 }

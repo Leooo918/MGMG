@@ -12,4 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b37326f26a194b545b8ac7743136c182, type: 3}
   m_Name: PoolList
   m_EditorClassIdentifier: 
-  _list: []
+  _list:
+  - {fileID: 11400000, guid: b9bddb291472a5b419835ec66025bbd3, type: 2}
+  - {fileID: 11400000, guid: c4418425aad59ec4c9f7e57b8617a807, type: 2}
+  - {fileID: 11400000, guid: b6f8dbcdb1fd5894bb94d4f21952813e, type: 2}
+  - {fileID: 11400000, guid: 9248437b75528564dbd257fc2d4b4784, type: 2}
+  - {fileID: 11400000, guid: 089c0a345a8834c44a8ab9a0431a210d, type: 2}
+  - {fileID: 11400000, guid: bd2bbb0c28a6165498b1ffe8e0330aab, type: 2}
+  - {fileID: 11400000, guid: f7088a1331128494b8e8d452dc53a61d, type: 2}
+  - {fileID: 11400000, guid: f953183518b8b894fa4fb1d4f6722e39, type: 2}
+  - {fileID: 11400000, guid: e896fd4b0abc36b4ea49739de988baf6, type: 2}

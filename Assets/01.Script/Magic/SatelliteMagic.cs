@@ -1,3 +1,4 @@
+using MGMG.Core.ObjectPooling;
 using MGMG.Entities;
 using System;
 using System.Collections.Generic;
@@ -11,14 +12,13 @@ namespace MGMG.Magic
         private Dictionary<Satellite, float> _rotationDictionary;
         private float _rotation;
 
-        private SatelliteMagicData _satelliteData;
+        private SatelliteMagicData _satelliteData => _magicData as SatelliteMagicData;
 
         public override void Initialize(Entity owner, MagicData magicData)
         {
             base.Initialize(owner, magicData);
             _satelliteList = new List<Satellite>();
             _rotationDictionary = new Dictionary<Satellite, float>();
-            _satelliteData = (SatelliteMagicData)magicData;
 
             if (_satelliteData == null)
             {
@@ -31,9 +31,11 @@ namespace MGMG.Magic
 
         public override void OnUpdate()
         {
-            foreach(var satellite in _satelliteList)
+            foreach (var satellite in _satelliteList)
             {
-                //satellite.SetRotation();
+                float rotation = _rotationDictionary[satellite] + (_satelliteData.satelliteRotateSpeed * Time.deltaTime);
+                _rotationDictionary[satellite] = rotation;
+                satellite.SetRotation(rotation);
             }
         }
 
@@ -58,10 +60,10 @@ namespace MGMG.Magic
 
                 for (int i = 0; i < count; i++)
                 {
-                    //Satellite satellite = PoolManager.Instance.Pop<Satellite>("satellite");
-                    //satellite.transform.localPosition = Vector3.zero;
-                    //satellite.transform.SetParent(_owner.transform);
-                    //_satelliteList.Add(satellite);
+                    Satellite satellite = PoolManager.Instance.Pop(SkillPoolingType.Satellite) as Satellite;
+                    satellite.transform.SetParent(_owner.transform);
+                    satellite.transform.localPosition = Vector3.zero;
+                    _satelliteList.Add(satellite);
                 }
             }
             else if (satelliteCount < _satelliteList.Count)
@@ -70,9 +72,9 @@ namespace MGMG.Magic
 
                 for (int i = 0; i < count; i++)
                 {
-                    //_rotationDictionary.Remove(_satelliteList[^1]);
-                    //PoolManager.Instance.Push<Satellite>("satellite", _satelliteList[^1]);
-                    //_satelliteList.RemoveAt(_satelliteList.Count - 1);
+                    _rotationDictionary.Remove(_satelliteList[^1]);
+                    PoolManager.Instance.Push(_satelliteList[^1], true);
+                    _satelliteList.RemoveAt(_satelliteList.Count - 1);
                 }
             }
 
@@ -81,30 +83,39 @@ namespace MGMG.Magic
                 float interval = 360 / satelliteCount;
                 for (int i = 0; i < satelliteCount; i++)
                 {
-                    if (_rotationDictionary.ContainsKey(_satelliteList[i]) == false) continue;
-
                     _satelliteList[i].SetRotation(interval * i);
                     _satelliteList[i].SetDistance(_satelliteData.satelliteDistance);
+
+                    if (_rotationDictionary.ContainsKey(_satelliteList[i]))
+                    {
+                        _rotationDictionary[_satelliteList[i]] = (interval * i);
+                    }
+                    else
+                    {
+                        _rotationDictionary.Add(_satelliteList[i], (interval * i));
+                    }
                 }
             }
         }
 
-        public override float GetCoolTime()
-        {
-            return _satelliteData.coolDownPerLevel[CurrentLevel];
-        }
+
+
+        #region Getter
 
         public override PlayerMagic GetInstance()
         {
             SatelliteMagic magic = new SatelliteMagic();
             return magic;
         }
+
+        #endregion
     }
 
     [Serializable]
     public class SatelliteMagicData : MagicData
     {
         public float satelliteDistance;
+        public float satelliteRotateSpeed;
         public int[] satelliteCountPerLevel;
         public int[] satelliteDamagePerLevel;
     }

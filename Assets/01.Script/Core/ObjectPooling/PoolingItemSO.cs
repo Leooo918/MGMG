@@ -14,7 +14,10 @@ namespace MGMG.Core.ObjectPooling
         {
             if (poolingKey == null)
             {
-                poolingKey = new PoolingKey(PoolObj.PoolEnum);
+                if (prefab != null)
+                {
+                    poolingKey = new PoolingKey(PoolObj.PoolEnum);
+                }
             }
         }
     }
