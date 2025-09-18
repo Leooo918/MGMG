@@ -87,7 +87,7 @@ namespace MGMG.Enemies
 
         protected virtual void HandleDieEvent()
         {
-            
+            PlayerManager.Instance.AddKillCount();
             ChangeState(enemyFSM[FSMState.Die]);
         }
 

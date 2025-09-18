@@ -28,7 +28,7 @@ MonoBehaviour:
       data:
         name: Satellite
         description: 
-        icon: {fileID: 0}
+        icon: {fileID: 21300000, guid: 300abdf8cbdd5c742a05b6506767fd64, type: 3}
         magicSchool: 0
         maxLevel: 5
         attackStat: {fileID: 11400000, guid: 066e1e8ac736f0c4aae04c15e2ef3f79, type: 2}

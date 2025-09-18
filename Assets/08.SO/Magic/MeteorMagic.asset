@@ -28,18 +28,11 @@ MonoBehaviour:
       data:
         name: Meteor
         description: 
-        icon: {fileID: 0}
+        icon: {fileID: 21300000, guid: 9f69b220176e6964fbd87f5f158d45e3, type: 3}
         magicSchool: 2
         maxLevel: 5
-        attackStat: {fileID: 11400000, guid: 066e1e8ac736f0c4aae04c15e2ef3f79, type: 2}
         coolDownPerLevel: 0700000006000000050000000400000003000000
-        damagePerLevel:
-        - 2
-        - 2.1
-        - 2.2
-        - 2.3
-        - 2.5
-        meteorMagicCount: 0200000003000000040000000500000006000000
-        fallingDuration: 1
         minSpawnRange: 2
         maxSpawnRange: 7
+        fallingDuration: 1
+        meteorMagicCount: 0200000003000000040000000500000006000000
