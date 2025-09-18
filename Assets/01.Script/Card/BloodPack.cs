@@ -36,6 +36,9 @@ public class BloodPack : Card
     public override Card GetInstance()
     {
         BloodPack bloodPack = new BloodPack();
+        bloodPack._healthIncrease = _healthIncrease;
+        bloodPack._healTick = _healTick;
+        bloodPack._healAmount = _healAmount;
         return bloodPack;
     }
 }

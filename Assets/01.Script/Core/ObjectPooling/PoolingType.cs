@@ -3,7 +3,8 @@ namespace MGMG.Core.ObjectPooling
 {
     public enum ObjectPoolingType
     {
-        RangedEnemyProjectile
+        RangedEnemyProjectile,
+        AreaDepolyment
     }
     public enum SkillPoolingType
     {
