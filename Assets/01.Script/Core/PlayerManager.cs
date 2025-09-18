@@ -5,6 +5,8 @@ namespace MGMG.Core
 {
     public class PlayerManager : MonoSingleton<PlayerManager>
     {
+        public int EnemyKillCount { get; set; }
+
         private Player _player;
         public Player Player
         {
@@ -18,6 +20,11 @@ namespace MGMG.Core
                 }
                 return _player;
             }
+        }
+
+        public void AddKillCount()
+        {
+            EnemyKillCount++;
         }
     }
 }
