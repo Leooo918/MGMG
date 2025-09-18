@@ -11,6 +11,7 @@ namespace MGMG.Core
     {
         [SerializeField] private Canvas _canvas;
         [SerializeField] private Image _selectPanel;
+        [SerializeField] private Image _escPanel;
         //private Slider _hpSlider;
         private Slider _xpSlider;
 
