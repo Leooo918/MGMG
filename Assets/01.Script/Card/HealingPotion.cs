@@ -28,7 +28,7 @@ public class HealingPotion : Card
             _healthCompo.ApplyDamage(null, -healValue, false, false);
             
             //사라지기
-            _owner.GetCompo<PlayerCardController>().RemoveCarad(_index);
+            _owner.GetCompo<PlayerCardController>().RemoveCard(_index);
         }
     }
 
