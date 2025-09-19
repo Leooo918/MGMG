@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 namespace MGMG.Core
 {
@@ -15,5 +16,11 @@ namespace MGMG.Core
 
         public CardSelectPanel CardSelectPanel => _cardSelectPanel;
         public MagicSelectPanel MagicSelectPanel => _magicSelectPanel;
+
+        public void SceneLoad(string sceneName)
+        {
+            Time.timeScale = 1;
+            SceneManager.LoadScene(sceneName);
+        }
     } 
 }

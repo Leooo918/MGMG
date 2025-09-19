@@ -5,13 +5,16 @@ using UnityEngine;
 
 public class GameManager : MonoSingleton<GameManager>
 {
-    [SerializeField] private TextMeshProUGUI _timerText;
+    [SerializeField] private TextMeshProUGUI _timerTxt;
     [SerializeField] private CanvasGroup _gameOver;
+    [SerializeField] private TextMeshProUGUI _killCountTxt, _gameOverTimeTxt;
     private float _erapseTime;
     private bool _running = false;
     public int Minute => _minute;
     public int Second => _second;
     private int _minute = 0, _second = 0;
+
+    private string _displayTime;
     protected override void Awake()
     {
         base.Awake();
@@ -39,7 +42,8 @@ public class GameManager : MonoSingleton<GameManager>
 
         string display = $"{minutesStr}:{secondsStr}";
 
-        _timerText.text = display;
+        _displayTime = display;
+        _timerTxt.text = display;
     }
 
     public void StartStopwatch()
@@ -54,6 +58,8 @@ public class GameManager : MonoSingleton<GameManager>
 
     public void GameOver()
     {
+        _killCountTxt.text = $"죽인 적 : {PlayerManager.Instance.EnemyKillCount}";
+        _gameOverTimeTxt.text = $"버틴 시간 : {_displayTime}";
         _gameOver.DOFade(1f, 0.2f)
          .SetEase(Ease.OutSine)
          .SetUpdate(true)

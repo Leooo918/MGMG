@@ -1,4 +1,5 @@
 using DG.Tweening;
+using MGMG.Core;
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -60,12 +61,12 @@ public class OptionPanel : MonoBehaviour
 
     private void RetryGame()
     {
-        //뭔가 재시작 그 해주면 됨ㅇㅇ
+        UIManager.Instance.SceneLoad("InGameScene");
     }
 
     private void ExitGame()
     {
-        //뭔가 나가는거 해주면 됨
+        UIManager.Instance.SceneLoad("TitleScene");
     }
 
     private void ResumeGame()

@@ -817,7 +817,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c827ae90963f58b40b4c794c845cb861, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneName: JYCScene
+  _sceneName: InGameScene
 --- !u!1 &1766620122
 GameObject:
   m_ObjectHideFlags: 0

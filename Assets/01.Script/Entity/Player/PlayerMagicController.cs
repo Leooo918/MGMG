@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 
 namespace MGMG.Entities
 {
-    public class PlayerMagicController : MonoBehaviour, IEntityComponent
+    public class PlayerMagicController : MonoBehaviour, IEntityComponent, IAfterInitable
     {
         [SerializeField] private MagicGroupSO _magicGroup;
         private Dictionary<string, float> _coolDownDict;
@@ -32,9 +32,16 @@ namespace MGMG.Entities
             _prevMagicUseTime = new List<float>();
             _owner = entity as Player;
 
+        }
+
+        public void AfterInit()
+        {
             GetMagic(_magicGroup.magicList.GetRandomInList());
         }
 
+        public void Dispose()
+        {
+        }
         public void GetMagic(MagicSO magic)
         {
             if(_magicDict.ContainsKey(magic))
@@ -108,6 +115,8 @@ namespace MGMG.Entities
         {
             _coolDownDict.Remove(key);
         }
+
+        
 
         #endregion
     }
