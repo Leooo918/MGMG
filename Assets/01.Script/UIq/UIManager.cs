@@ -160,9 +160,10 @@ namespace MGMG.Core
         public void XpApply(int value)
         {
             float prevValue = _xpSlider.value;
+            _xpSlider.maxValue = PlayerManager.Instance.MaxExp;
             float maxValue = _xpSlider.maxValue;
 
-            float targetValue = prevValue + value;
+            float targetValue = PlayerManager.Instance.CurrentExp;
 
             if (targetValue >= maxValue)
             {
