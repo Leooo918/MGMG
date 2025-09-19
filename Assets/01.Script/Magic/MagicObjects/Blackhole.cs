@@ -31,28 +31,45 @@ public class Blackhole : MonoBehaviour, IPoolable
 
     protected void Update()
     {
+        DetectEnemy(PullEnemy);
+
         if(_prevTick + _tickDelay < Time.time)
         {
             _prevTick = Time.time;
-            ContactFilter2D contactFilter = new ContactFilter2D();
-            contactFilter.SetLayerMask(_whatIsEnemy);
-            int count = Physics2D.OverlapCircle(transform.position, _gravity, contactFilter, _collider);
 
-            for (int i = 0; i < count; i++)
-            {
-                if (_collider[i].TryGetComponent(out Enemy enemy))
-                {
-                    // 뭔가 거리에 따라서 땡기기
-                    Vector2 direction = (enemy.transform.position - transform.position).normalized;
-                    enemy.GetCompo<EntityMover>().AddForceToEntity(direction);
-                    enemy.GetCompo<EntityHealth>().ApplyDamage(_entity.GetCompo<EntityStat>(), _damage);
-                }
-            }
+            DetectEnemy(TakeDamage);
             if (_lifeTime < Time.time)
             {
                 PoolManager.Instance.Push(this);
             }
         }
+    }
+
+    private void DetectEnemy(Action<Enemy> action)
+    {
+        ContactFilter2D contactFilter = new ContactFilter2D();
+        contactFilter.SetLayerMask(_whatIsEnemy);
+        int count = Physics2D.OverlapCircle(transform.position, _gravity, contactFilter, _collider);
+        for (int i = 0; i < count; i++)
+        {
+            if (_collider[i].TryGetComponent(out Enemy enemy))
+            {
+                action?.Invoke(enemy);
+            }
+        }
+    }
+
+    private void TakeDamage(Enemy enemy)
+    {
+        //enemy.GetCompo<EntityHealth>().ApplyDamage(_entity.GetCompo<EntityStat>(), _damage);
+    }
+
+    private void PullEnemy(Enemy enemy)
+    {
+        // 뭔가 거리에 따라서 땡기기
+        float distance = (transform.position - enemy.transform.position).magnitude;
+        Vector2 direction = -(enemy.transform.position - transform.position).normalized * (_gravity - distance) * Time.deltaTime;
+        enemy.GetCompo<EntityMover>().AddForceToEntity(direction, Time.deltaTime);
     }
 
     public void OnPop()

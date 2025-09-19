@@ -32,13 +32,13 @@ MonoBehaviour:
         magicSchool: 4
         maxLevel: 5
         attackStat: {fileID: 11400000, guid: 066e1e8ac736f0c4aae04c15e2ef3f79, type: 2}
-        coolDownPerLevel: 0a0000000a0000000a0000000a0000000a000000
+        coolDownPerLevel: 050000000b0000000b0000000a0000000a000000
         gravityPerLevel:
         - 5
-        - 5
-        - 6
         - 6
         - 7
+        - 8
+        - 9
         sizePerLevel:
         - 1
         - 1.1

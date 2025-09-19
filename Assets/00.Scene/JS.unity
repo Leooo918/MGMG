@@ -900,7 +900,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aca5843dfa0102c45ba3496daa546a3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _debugMagic: {fileID: 11400000, guid: b5065620a3460404da25ca0d84da8592, type: 2}
+  _debugMagic: {fileID: 11400000, guid: 4b8642ac543b4fd4784fcc2f25f0efd1, type: 2}
   _debugUpgradeIndex: 0
 --- !u!1 &1830952879
 GameObject:

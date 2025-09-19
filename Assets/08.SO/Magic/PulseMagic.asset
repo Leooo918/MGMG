@@ -49,8 +49,8 @@ MonoBehaviour:
         - 3.5
         - 4
         _knockBackPowerPerLevel:
-        - 100
+        - 5
+        - 7
+        - 8
+        - 9
         - 10
-        - 15
-        - 20
-        - 25
