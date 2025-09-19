@@ -37,5 +37,10 @@ MonoBehaviour:
         whatIsEnemy:
           serializedVersion: 2
           m_Bits: 128
-        magicCountPerLevel: 
-        damagePerLevel: []
+        magicCountPerLevel: 0100000001000000020000000200000003000000
+        damagePerLevel:
+        - 2
+        - 2.1
+        - 2.15
+        - 2.2
+        - 2.3

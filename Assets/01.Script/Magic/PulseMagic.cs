@@ -25,7 +25,7 @@ namespace MGMG.Magic
                 {
                     //넉백, 데미지 주기
                     Vector2 force = (enemy.transform.position - _owner.transform.position).normalized * _pulseMagicData._knockBackPowerPerLevel[CurrentLevel];
-                    int damage = Mathf.RoundToInt(_attackStat.IntValue * _pulseMagicData._damagePerLevel[CurrentLevel]);
+                    int damage = Mathf.RoundToInt(_attackStat.Value * _pulseMagicData._damagePerLevel[CurrentLevel]);
 
                     enemy.GetCompo<EntityMover>().AddForceToEntity(force);
                     enemy.GetCompo<EntityHealth>().ApplyDamage(_stat, damage);

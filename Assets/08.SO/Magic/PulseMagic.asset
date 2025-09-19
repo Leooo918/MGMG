@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 069bab2727a38cb4791aebad7125e9f2, type: 3}
+  m_Name: PulseMagic
+  m_EditorClassIdentifier: 
+  magicName: Pulse
+  magic:
+    rid: 1995755859534151763
+  magicData:
+    rid: 1995755859534151764
+  references:
+    version: 2
+    RefIds:
+    - rid: 1995755859534151763
+      type: {class: PulseMagic, ns: MGMG.Magic, asm: Assembly-CSharp}
+      data: 
+    - rid: 1995755859534151764
+      type: {class: PulseMagicData, ns: MGMG.Magic, asm: Assembly-CSharp}
+      data:
+        name: Pulse
+        description: 
+        icon: {fileID: 0}
+        magicSchool: 4
+        maxLevel: 5
+        attackStat: {fileID: 11400000, guid: 066e1e8ac736f0c4aae04c15e2ef3f79, type: 2}
+        coolDownPerLevel: 0400000004000000030000000300000002000000
+        _whatIsEnemy:
+          serializedVersion: 2
+          m_Bits: 128
+        _damagePerLevel:
+        - 0.3
+        - 0.35
+        - 0.4
+        - 0.5
+        - 0.6
+        _rangePerLevel:
+        - 2
+        - 2.5
+        - 3
+        - 3.5
+        - 4
+        _knockBackPowerPerLevel:
+        - 100
+        - 10
+        - 15
+        - 20
+        - 25

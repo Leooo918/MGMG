@@ -14,7 +14,7 @@ namespace MGMG.Magic
             ContactFilter2D contactFilter = new ContactFilter2D();
             contactFilter.SetLayerMask(_icicleBulletData.whatIsEnemy);
             int count = Physics2D.OverlapCircle(_owner.transform.position, _icicleBulletData.detectRange, contactFilter, _collider);
-            int damage = Mathf.RoundToInt(_attackStat.IntValue * _icicleBulletData.damagePerLevel[CurrentLevel]);
+            int damage = Mathf.RoundToInt(_attackStat.Value * _icicleBulletData.damagePerLevel[CurrentLevel]);
 
             if (count > 0)
             {

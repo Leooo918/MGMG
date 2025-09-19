@@ -35,7 +35,7 @@ namespace MGMG.Magic
                     //ÀÌÆåÆ® Àç»ý
                     if(_collider[j].TryGetComponent(out Enemy enemy))
                     {
-                        int damage = Mathf.RoundToInt(_attackStat.IntValue * _lightningMagicData.damagePerLevel[CurrentLevel]);
+                        int damage = Mathf.RoundToInt(_attackStat.Value * _lightningMagicData.damagePerLevel[CurrentLevel]);
                         enemy.GetCompo<EntityHealth>().ApplyDamage(_owner.GetCompo<EntityStat>(), damage);
                     }
 

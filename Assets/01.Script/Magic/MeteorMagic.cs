@@ -18,7 +18,7 @@ namespace MGMG.Magic
                 Vector2 meteorPosition = (Vector2)_owner.transform.position + (UnityEngine.Random.insideUnitCircle.normalized
             * UnityEngine.Random.Range(_metorMagicData.minSpawnRange, _metorMagicData.maxSpawnRange));
 
-                int damage = Mathf.RoundToInt(_attackStat.IntValue * _metorMagicData.damagePerLevel[CurrentLevel]);
+                int damage = Mathf.RoundToInt(_attackStat.Value * _metorMagicData.damagePerLevel[CurrentLevel]);
                 meteor.Fire(_owner, meteorPosition, _metorMagicData.fallingDuration, damage);
             }
         }

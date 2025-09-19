@@ -25,6 +25,7 @@ namespace MGMG.Core.ObjectPooling
 
         private void CreatePool(PoolingItemSO item)
         {
+            Debug.Log(item.name);
             var key = item.PoolObj.PoolEnum;
             var pool = new Pool<IPoolable>(item.PoolObj, new PoolingKey(key), transform, item.poolCount);
             _poolDictionary.Add(new PoolingKey(key), pool);

@@ -10,7 +10,7 @@ namespace MGMG.Magic
         public override void OnUseSkill()
         {
             base.OnUseSkill();
-            int damage = Mathf.RoundToInt(_attackStat.IntValue * _iceLinkMagic.damagePerLevel[CurrentLevel]);
+            int damage = Mathf.RoundToInt(_attackStat.Value * _iceLinkMagic.damagePerLevel[CurrentLevel]);
 
             IceLink iceLink = (IceLink)PoolManager.Instance.Pop(SkillPoolingType.IceLink);
             iceLink.transform.SetParent(_owner.transform);

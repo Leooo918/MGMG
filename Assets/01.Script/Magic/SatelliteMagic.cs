@@ -64,7 +64,7 @@ namespace MGMG.Magic
 
         private void SetSatelliteDamage()
         {
-            int damage = Mathf.RoundToInt(_attackStat.IntValue * _satelliteData.satelliteDamagePerLevel[CurrentLevel]);
+            int damage = Mathf.RoundToInt(_attackStat.Value * _satelliteData.satelliteDamagePerLevel[CurrentLevel]);
             _satelliteList.ForEach(satellite => satellite.SetDamage(damage));
         }
         private void SetSatellite()

@@ -10,10 +10,12 @@ namespace MGMG.Magic
         public override void OnUseSkill()
         {
             base.OnUseSkill();
+            int damage = Mathf.RoundToInt(_attackStat.Value * _electricZoneMagic.damagePerLevel[CurrentLevel]);
+
             ElectricZone electricZone = (ElectricZone)PoolManager.Instance.Pop(SkillPoolingType.ElectricZone);
             electricZone.transform.SetParent(_owner.transform);
             electricZone.transform.localPosition = Vector3.zero;
-            electricZone.Initialize(_electricZoneMagic.levelPerRange[CurrentLevel], _electricZoneMagic.levelPerLifetime[CurrentLevel]);
+            electricZone.Initialize(_owner, damage, _electricZoneMagic.rangePerLevel[CurrentLevel], _electricZoneMagic.damagePerLevel[CurrentLevel]);
         }
 
         public override PlayerMagic GetInstance()
@@ -23,7 +25,8 @@ namespace MGMG.Magic
     }
     public class ElectricZoneMagicData : MagicData
     {
-        public float[] levelPerRange;
-        public float[] levelPerLifetime;
+        public float[] rangePerLevel;
+        public float[] lifeTimePerLevel;
+        public float[] damagePerLevel;
     }
 }

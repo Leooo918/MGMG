@@ -20,9 +20,9 @@ namespace MGMG.Magic
         public virtual void Initialize(Entity owner, MagicData magicData)
         {
             _owner = owner;
+            _magicData = magicData;
             _stat = _owner.GetCompo<EntityStat>();
             _attackStat = _stat.StatDictionary[_magicData.attackStat];
-            _magicData = magicData;
         }
 
         public virtual void OnLevelUp()

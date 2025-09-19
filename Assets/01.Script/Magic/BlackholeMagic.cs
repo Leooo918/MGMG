@@ -10,11 +10,11 @@ namespace MGMG.Magic
         public override void OnUseSkill()
         {
             base.OnUseSkill();
-            int damage = _attackStat.IntValue * _blackholeMagicData.damagePerLevel[CurrentLevel];
+            int damage = Mathf.RoundToInt(_attackStat.Value * _blackholeMagicData.damagePerLevel[CurrentLevel]);
 
             Blackhole blackhole = (Blackhole)PoolManager.Instance.Pop(SkillPoolingType.Blackhole);
+            blackhole.Initialize(_owner, damage, _blackholeMagicData.gravityPerLevel[CurrentLevel], _blackholeMagicData.sizePerLevel[CurrentLevel], _blackholeMagicData.lifeTimePerLevel[CurrentLevel]);
             blackhole.transform.position = _owner.transform.position;
-            blackhole.Initialize(_blackholeMagicData.gravityPerLevel[CurrentLevel], damage, _blackholeMagicData.sizePerLevel[CurrentLevel], _blackholeMagicData.lifeTimePerLevel[CurrentLevel]);
         }
 
         public override PlayerMagic GetInstance()
@@ -28,6 +28,6 @@ namespace MGMG.Magic
         public float[] gravityPerLevel;
         public float[] sizePerLevel;
         public float[] lifeTimePerLevel;
-        public int[] damagePerLevel;
+        public float[] damagePerLevel;
     }
 }
