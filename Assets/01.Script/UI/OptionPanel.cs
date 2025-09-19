@@ -1,16 +1,76 @@
+using DG.Tweening;
+using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class OptionPanel : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] private Button _resumeButton;
+    [SerializeField] private Button _retryButton;
+    [SerializeField] private Button _goToTileButton;
+    [SerializeField] private Slider _volumeSlider;
+    private bool _isOpen = false;
+
+    private Tween _openCloseTween;
+    private float _openPosition = 0, _closePosition = -1080;
+    private float _openCloseDuration = 0.3f;
+
+    private RectTransform RectTrm => transform as RectTransform;
+
+    private void Awake()
     {
-        
+        _resumeButton.onClick.AddListener(ResumeGame);
+        _retryButton.onClick.AddListener(RetryGame);
+        _goToTileButton.onClick.AddListener(ExitGame);
+        _volumeSlider.onValueChanged.AddListener(OnVolumeChnaged);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        if (Keyboard.current.escapeKey.wasPressedThisFrame)
+        {
+            if (_isOpen) Close();
+            else Open();
+        }
+    }
+
+    private void Open()
+    {
+        if (_openCloseTween != null && _openCloseTween.active)
+            _openCloseTween.Kill();
+
+        _isOpen = true;
+        Time.timeScale = 0;
+        _openCloseTween = RectTrm.DOAnchorPosY(_openPosition, _openCloseDuration).SetUpdate(true);
+    }
+    private void Close()
+    {
+        if (_openCloseTween != null && _openCloseTween.active)
+            _openCloseTween.Kill();
+
+        _isOpen = false;
+        _openCloseTween = RectTrm.DOAnchorPosY(_closePosition, _openCloseDuration).SetUpdate(true);
+    }
+
+    private void OnVolumeChnaged(float value)
+    {
+
+    }
+
+    private void RetryGame()
+    {
+        //¹º°¡ Àç½ÃÀÛ ±× ÇØÁÖ¸é µÊ¤·¤·
+    }
+
+    private void ExitGame()
+    {
+        //¹º°¡ ³ª°¡´Â°Å ÇØÁÖ¸é µÊ
+    }
+
+    private void ResumeGame()
+    {
+        Time.timeScale = 1;
+        Close();
     }
 }

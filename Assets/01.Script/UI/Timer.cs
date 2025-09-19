@@ -1,16 +1,39 @@
+using TMPro;
 using UnityEngine;
 
 public class Timer : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] private TextMeshProUGUI _text;
+    private bool _isUsingTimer = false;
+
+    private float _timer = 0;
+    private int _nextTimerUpdate = 1;
+
+    private void Update()
     {
-        
+        if (_isUsingTimer == false) return;
+
+        _timer += Time.deltaTime;
+        Debug.Log(Time.timeScale);
+
+        if (_timer >= _nextTimerUpdate)
+        {
+            _text.SetText(string.Format("{0:00}:{1:00}", _nextTimerUpdate / 60, _nextTimerUpdate % 60));
+            _nextTimerUpdate++;
+        }
+
     }
 
-    // Update is called once per frame
-    void Update()
+
+    [ContextMenu("Start")]
+    public void StartTimer()
     {
-        
+        _isUsingTimer = true;
+    }
+
+    public float EndTimer()
+    {
+        _isUsingTimer = false;
+        return _timer;
     }
 }
