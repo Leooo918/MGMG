@@ -66,7 +66,7 @@ namespace MGMG.Combat.Projectile
             {
                 if (hits[0].transform.TryGetComponent(out Entity entity))
                 {
-                    entity.GetCompo<EntityHealth>().ApplyDamage(_entity.GetCompo<EntityStat>(), _damage);
+                    entity.GetCompo<EntityHealth>().ApplyDamage(_entity.GetCompo<EntityStat>(), _damage,true,false);
                     Die();
                 }
                 _isEnable = false;

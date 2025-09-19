@@ -21,13 +21,11 @@ namespace MGMG.FSM
             base.Enter();
 
             _mover.StopImmediately();
-        }
-
-        public override void Update()
-        {
-            base.Update();
+            GameManager.Instance.PauseStopwatch();
             GameManager.Instance.GameOver();
         }
+
+       
     }
 
 }

@@ -54,6 +54,6 @@ public class GameManager : MonoSingleton<GameManager>
 
     public void GameOver()
     {
-        _gameOver.DOFade(1, 1);
+        _gameOver.DOFade(1, 0.2f);
     }
 }

@@ -4,6 +4,7 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using TMPro;
 
 namespace MGMG.Core
 {
@@ -11,12 +12,8 @@ namespace MGMG.Core
     {
         [SerializeField] private CardSelectPanel _cardSelectPanel;
         [SerializeField] private MagicSelectPanel _magicSelectPanel;
-        [SerializeField] private Timer _timer;
 
         public CardSelectPanel CardSelectPanel => _cardSelectPanel;
         public MagicSelectPanel MagicSelectPanel => _magicSelectPanel;
-        public Timer Timer => _timer;
-
-
     } 
 }

@@ -1,4 +1,5 @@
 using MGMG.Combat.Caster;
+using MGMG.Entities;
 using MGMG.Entities.Component;
 using MGMG.StatSystem;
 using UnityEngine;
@@ -15,9 +16,9 @@ namespace MGMG.Enemies
         {
             if (_defaultAttackCaster.CheckCollision(out RaycastHit2D[] hits, whatIsTarget))
             {
-                if (hits[0].transform.TryGetComponent(out EntityHealth health))
+                if (hits[0].transform.TryGetComponent(out Player player))
                 {
-                    health.ApplyDamage(_statCompo, Mathf.RoundToInt(damageStat.Value));
+                    player.GetCompo<EntityHealth>().ApplyDamage(_statCompo, Mathf.RoundToInt(damageStat.Value),true,false);
                 }
             }
         }

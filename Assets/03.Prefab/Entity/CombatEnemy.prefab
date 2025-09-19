@@ -145,7 +145,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   enemyFSM: {fileID: 11400000, guid: 22c77c34e3761ae4b926de6b6e3e682e, type: 2}
-  _attackRange: 2
+  _attackRange: 1
   lastAttackTime: 0
   _damageSO: {fileID: 11400000, guid: 066e1e8ac736f0c4aae04c15e2ef3f79, type: 2}
   _attackCooldownSO: {fileID: 11400000, guid: 1549c3f67b279454ca2554ef67f8c38f, type: 2}
@@ -164,7 +164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offset: {x: 0, y: 0}
-  radius: 1.5
+  radius: 1
 --- !u!50 &6819778693727550427
 Rigidbody2D:
   serializedVersion: 5
@@ -222,7 +222,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0

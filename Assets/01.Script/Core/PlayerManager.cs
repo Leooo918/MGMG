@@ -26,6 +26,7 @@ namespace MGMG.Core
         public int CurrentExp { get; private set; } = 0;
         public event Action<int> OnExpChangedEvent;
         public int MaxExp { get; private set; } = 100;
+        [SerializeField] private Vector2Int _minMaxPlayerLevel = new Vector2Int(1, 33);
         public int EnemyKillCount { get; set; }
 
 
@@ -38,7 +39,19 @@ namespace MGMG.Core
         private void LevelUp()
         {
             CurrentPlayerLevel++;
+            if (CurrentPlayerLevel > _minMaxPlayerLevel.y)
+                CurrentPlayerLevel = _minMaxPlayerLevel.y;
+
             OnChangedPlayerLevelEvent?.Invoke(CurrentPlayerLevel);
+            if(CurrentPlayerLevel % 7 == 0)
+            {
+                UIManager.Instance.CardSelectPanel.Open();
+            }
+            else
+            {
+                UIManager.Instance.MagicSelectPanel.Open();
+            }
+
             MaxExp += (int)(MathF.Log(2, CurrentPlayerLevel) * 100);
         }
         public void AddExp(int exp)

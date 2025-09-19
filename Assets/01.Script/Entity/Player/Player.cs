@@ -72,7 +72,6 @@ namespace MGMG.Entities
             _healthStat = GetCompo<EntityStat>().StatDictionary["Health"];
             _critical = GetCompo<EntityStat>().StatDictionary["Critical"];
 
-            Debug.Log(_damageStat.Value);
         }
 
         private void HandleDieEvent()

@@ -9,8 +9,6 @@ public class XPSlider : MonoBehaviour
     [SerializeField] private Slider _slider;
     [SerializeField] private TextMeshProUGUI _levelText;
 
-    private int _level = 1;
-
     private void Start()
     {
         float maxValue = PlayerManager.Instance.MaxExp;
@@ -31,7 +29,7 @@ public class XPSlider : MonoBehaviour
         {
             float remainingXp = targetValue - maxValue;
             _slider.maxValue *= 1.1f;
-            _levelText.SetText($"Lv. {_level++}");
+            _levelText.SetText($"Lv. {PlayerManager.Instance.CurrentPlayerLevel}");
 
             DOTween.To(() => _slider.value, x => _slider.value = x, maxValue, 0.3f)
                 .SetEase(Ease.OutCirc)

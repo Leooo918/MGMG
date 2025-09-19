@@ -26,6 +26,7 @@ namespace MGMG.FSM
             base.Enter();
             _animTrigger.IsVelocityChange = false;
             _enemy.lastAttackTime = Time.time;
+            DOVirtual.DelayedCall(0.1f, () => _enemy.Attack());
             _enemy.Attack();
             _mover.StopImmediately();
             _animTrigger.OnAnimationEndTrigger += ChangeState;

@@ -2,7 +2,6 @@ using MGMG.Core;
 using MGMG.Entities;
 using MGMG.Magic;
 using System.Collections.Generic;
-using UnityEditor.iOS.Xcode;
 using UnityEngine;
 
 public class MagicPanel : MonoBehaviour

@@ -44,7 +44,6 @@ namespace MGMG.Enemies
         public void OnPop()
         {
             _healthCompo.MaxHealthElement.AddModify("TimeHealthAdd", GameManager.Instance.Minute * 20f, EModifyMode.Percent, EModifyLayer.Default);
-            Debug.Log(_healthCompo.MaxHealth);
             _healthCompo.Resurrection();
             _stateMachine.Initialize(GetState(enemyFSM[FSMState.Chase]));
         }

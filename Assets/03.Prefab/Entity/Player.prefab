@@ -107,8 +107,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 563777341
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 1572034964, guid: fdf56bf2c0b633940b834f68fddfc571, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -349,6 +349,8 @@ GameObject:
   - component: {fileID: 5037391138347160169}
   - component: {fileID: 3837595183597795900}
   - component: {fileID: 2896381299239431495}
+  - component: {fileID: 8661002299990356552}
+  - component: {fileID: 980012177483492142}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -465,6 +467,34 @@ MonoBehaviour:
   playerFSM: {fileID: 11400000, guid: 0ff873ad86f164f4086fe662232b681b, type: 2}
   <PlayerInput>k__BackingField: {fileID: 11400000, guid: 5d1379df20bfad94194a1502e4939d09, type: 2}
   _dashCooltime: 2
+--- !u!114 &8661002299990356552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4043654566974818023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aca5843dfa0102c45ba3496daa546a3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _debugMagic: {fileID: 0}
+  _debugUpgradeIndex: 0
+--- !u!114 &980012177483492142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4043654566974818023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d32e435875b97cc43ab9bd1059a71173, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _debugCard: {fileID: 0}
+  _removeIndex: 0
 --- !u!1 &4137402014146975112
 GameObject:
   m_ObjectHideFlags: 0
