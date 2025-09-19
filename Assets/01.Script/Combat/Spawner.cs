@@ -55,7 +55,7 @@ namespace MGMG.Combat
             var enumLen = System.Enum.GetValues(typeof(EnemyPoolingType)).Length;
             for (int i = 0; i < wave.enemyCount; ++i)
             {
-                EnemyPoolingType type = (EnemyPoolingType)Random.Range(0, 0);
+                EnemyPoolingType type = (EnemyPoolingType)Random.Range(0, enumLen);
                 _enemyList.Add(type);
             }
         }
