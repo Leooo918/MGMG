@@ -31,9 +31,9 @@ namespace MGMG.Entities.Component
             _renderer.SetParam(_yAnimParam, _playerInput.InputDirection.normalized.y);
         }
 
-        public void Dispose()
+        public void Dispose() 
         {
-            _player.PlayerInput.MoveEvent += HandleMove;
+            _player.PlayerInput.MoveEvent -= HandleMove;
 
         }
 

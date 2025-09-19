@@ -14,6 +14,11 @@ namespace MGMG.Input
 
         private Controls _controls;
 
+
+        public void ClearSubscription()
+        {
+            MoveEvent = null;
+        }
         private void OnEnable()
         {
             if (_controls == null)

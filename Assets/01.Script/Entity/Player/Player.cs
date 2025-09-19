@@ -57,6 +57,7 @@ namespace MGMG.Entities
         {
             //PlayerInput.DashEvent -= HandleDash;
             _health.OnDieEvent -= HandleDieEvent;
+            PlayerInput.ClearSubscription();
         }
 
         protected override void AfterInitComponents()
