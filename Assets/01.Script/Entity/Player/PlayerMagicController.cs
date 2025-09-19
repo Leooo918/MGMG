@@ -2,6 +2,7 @@ using MGMG.Magic;
 using MGMG.StatSystem;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,6 +12,7 @@ namespace MGMG.Entities
     {
         private Dictionary<string, float> _coolDownDict;
 
+        private Dictionary<MagicSO, PlayerMagic> _magicDict;
         private List<PlayerMagic> _containMagic;
         private List<float> _prevMagicUseTime;
         private Player _owner;
@@ -18,9 +20,13 @@ namespace MGMG.Entities
         [SerializeField] private MagicSO _debugMagic;
         [SerializeField] private int _debugUpgradeIndex;
 
+        public event Action<MagicSO> OnGetMagic;
+        public event Action<int, int> OnUpgradeMagic;
+
         public void Initialize(Entity entity)
         {
             _coolDownDict = new();
+            _magicDict = new Dictionary<MagicSO, PlayerMagic>();
             _containMagic = new List<PlayerMagic>();
             _prevMagicUseTime = new List<float>();
             _owner = entity as Player;
@@ -28,16 +34,32 @@ namespace MGMG.Entities
 
         public void GetMagic(MagicSO magic)
         {
+            if(_magicDict.ContainsKey(magic))
+            {
+                UpgradeMagic(magic);
+                return;
+            }
+            OnGetMagic?.Invoke(magic);
+
             PlayerMagic playerMagic = magic.magic.GetInstance();
             playerMagic.Initialize(_owner, magic.magicData);
+            _magicDict.Add(magic, playerMagic);
             _containMagic.Add(playerMagic);
             _prevMagicUseTime.Add(Time.time);
         }
 
-        public void UpgradeMagic(int index)
+        public int GetMagicLevel(MagicSO magic)
         {
-            if (index < 0 || index >= _containMagic.Count) return;
-            _containMagic[index].OnLevelUp();
+            if (_magicDict.ContainsKey(magic) == false) return 0;
+            return (_magicDict[magic].CurrentLevel + 1);
+        }
+        public void UpgradeMagic(MagicSO magicSO)
+        {
+            if (_magicDict.TryGetValue(magicSO, out PlayerMagic magic))
+            {
+                magic.OnLevelUp();
+                OnUpgradeMagic?.Invoke(_containMagic.IndexOf(magic), (magic.CurrentLevel + 1));
+            }
         }
 
         private void Update()
@@ -59,7 +81,7 @@ namespace MGMG.Entities
             }
             if (Keyboard.current.oKey.wasPressedThisFrame)
             {
-                UpgradeMagic(_debugUpgradeIndex);
+                //UpgradeMagic(_debugUpgradeIndex);
             }
         }
 
@@ -76,7 +98,7 @@ namespace MGMG.Entities
         }
         public void SetCoolDown(string key, float coolDown)
         {
-            if(_coolDownDict.ContainsKey(key)) _coolDownDict[key] = coolDown;
+            if (_coolDownDict.ContainsKey(key)) _coolDownDict[key] = coolDown;
             else _coolDownDict.Add(key, coolDown);
         }
         public void RemoveCoolDown(string key)

@@ -16,6 +16,7 @@ namespace MGMG.Magic
         protected int _currentLevel = 0;
 
         public int CurrentLevel => _currentLevel;
+        public MagicData MagicData => _magicData;
 
         public virtual void Initialize(Entity owner, MagicData magicData)
         {
@@ -41,6 +42,7 @@ namespace MGMG.Magic
     public abstract class MagicData
     {
         public string name;
+        public string displayName;
         public string description;
         public Sprite icon;
         public EMagicSchool magicSchool;
