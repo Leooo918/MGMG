@@ -14,6 +14,8 @@ namespace MGMG.Entities.Component
         public Vector2 Velocity => _rbCompo.linearVelocity;
         public Vector2 VisualVelocity => _lockVisualVelocity && _lastVelocity.sqrMagnitude > 0.0001f ? _lastVelocity : _rbCompo.linearVelocity;
 
+        public bool CanManualMove { get; private set; } = true;
+
         private Rigidbody2D _rbCompo;
         private Entity _entity;
         private EntityRenderer _renderer;
@@ -32,9 +34,11 @@ namespace MGMG.Entities.Component
         {
             _speedStat = _statCompo.StatDictionary["Speed"];
         }
-        public void AddForceToEntity(Vector2 force, ForceMode2D mode = ForceMode2D.Impulse)
+        public void AddForceToEntity(Vector2 force,float time, ForceMode2D mode = ForceMode2D.Impulse)
         {
+            CanManualMove = false;
             _rbCompo.AddForce(force, mode);
+            DOVirtual.DelayedCall(time, () => CanManualMove = true);
         }
 
         public void StopImmediately(bool visualPreserve = true)
@@ -55,6 +59,8 @@ namespace MGMG.Entities.Component
 
         private void MoveCharacter()
         {
+            if(CanManualMove == false)
+                return;
             if (_movement.sqrMagnitude > 0.0001f)
                 _lastVelocity = _movement * _speedStat.Value;
 
