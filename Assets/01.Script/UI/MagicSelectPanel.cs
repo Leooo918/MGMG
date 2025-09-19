@@ -3,13 +3,15 @@ using MGMG.Core;
 using MGMG.Entities;
 using MGMG.Magic;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class MagicSelectPanel : MonoBehaviour
 {
-    [SerializeField] private List<MagicSO> _exsistingMagic;
+    [SerializeField] private MagicGroupSO _magicGroup;
     [SerializeField] private List<MagicSelectCard> _magicSelection;
 
+    private List<MagicSO> _exsistingMagic;
     private PlayerMagicController _magicController;
     private MagicSO[] _magic = new MagicSO[3];
     private Tween _openCloseTween;
@@ -19,6 +21,7 @@ public class MagicSelectPanel : MonoBehaviour
 
     private void Start()
     {
+        _exsistingMagic = _magicGroup.magicList.ToList();      //ToList는 새로 인스턴스화 하기 위해
         _magicController = PlayerManager.Instance.Player.GetCompo<PlayerMagicController>();
         for(int i = 0; i < _magicSelection.Count; i++)
         {
