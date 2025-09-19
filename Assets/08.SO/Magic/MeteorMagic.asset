@@ -27,7 +27,9 @@ MonoBehaviour:
       type: {class: MeteorMagicData, ns: MGMG.Magic, asm: Assembly-CSharp}
       data:
         name: Meteor
-        description: 
+        displayName: "\uBA54\uD14C\uC624"
+        description: "\uC77C\uC815 \uC2DC\uAC04\uB9C8\uB2E4 \uB79C\uB364\uD55C \uACF3\uC73C\uB85C
+          \uBA54\uD14C\uC624\uB97C \uB450\uAC1C \uB5A8\uAD70\uB2E4."
         icon: {fileID: 21300000, guid: 9f69b220176e6964fbd87f5f158d45e3, type: 3}
         magicSchool: 2
         maxLevel: 5

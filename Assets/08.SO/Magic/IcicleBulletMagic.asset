@@ -27,7 +27,9 @@ MonoBehaviour:
       type: {class: IcicleBulletMagicData, ns: MGMG.Magic, asm: Assembly-CSharp}
       data:
         name: IcicleBullet
-        description: 
+        displayName: "\uACE0\uB4DC\uB984\uD0C4"
+        description: "\uC77C\uC815 \uC2DC\uAC04\uB9C8\uB2E4 \uC801\uC5D0\uAC8C \uACE0\uB4DC\uB984\uD0C4\uC744
+          \uBC1C\uC0AC\uD55C\uB2E4."
         icon: {fileID: 21300000, guid: 4184495d79c523148bd19006e6e88b2d, type: 3}
         magicSchool: 3
         maxLevel: 5

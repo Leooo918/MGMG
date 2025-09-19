@@ -27,7 +27,9 @@ MonoBehaviour:
       type: {class: LightningMagicData, ns: MGMG.Magic, asm: Assembly-CSharp}
       data:
         name: Lightning
-        description: 
+        displayName: "\uB099\uB8B0"
+        description: "\uC77C\uC815 \uC2DC\uAC04\uB9C8\uB2E4 \uC801\uC5D0\uAC8C \uB099\uB8B0\uB97C
+          \uB5A8\uAD70\uB2E4."
         icon: {fileID: 21300000, guid: 676104ad271b0c241bee12c8409a1304, type: 3}
         magicSchool: 1
         maxLevel: 5

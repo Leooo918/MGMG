@@ -18,7 +18,7 @@ public class ElectricZone : MonoBehaviour, IPoolable
     private float _tickDelay = 0.1f;
     private float _prevTick;
 
-    private Collider2D[] _collider;
+    private Collider2D[] _collider = new Collider2D[5];
 
     public GameObject GameObject => gameObject;
     public Enum PoolEnum => SkillPoolingType.ElectricZone;
@@ -46,6 +46,8 @@ public class ElectricZone : MonoBehaviour, IPoolable
             _prevTick = Time.time;
 
             ContactFilter2D contactFilter = new ContactFilter2D();
+            contactFilter.useLayerMask = true;
+            contactFilter.useTriggers = true;
             contactFilter.SetLayerMask(_layerMask);
 
             int count = Physics2D.OverlapCircle(transform.position, _range, contactFilter, _collider);

@@ -58,7 +58,6 @@ namespace MGMG.Magic
         {
             base.OnLevelUp();
             SetSatellite();
-            SetSatelliteDamage();
         }
 
 
@@ -95,6 +94,7 @@ namespace MGMG.Magic
             }
 
             SetSatelliteRotation(satelliteCount);
+            SetSatelliteDamage();
         }
 
         private void SetSatelliteRotation(int satelliteCount)

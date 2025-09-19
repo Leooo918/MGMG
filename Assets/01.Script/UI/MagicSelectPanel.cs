@@ -23,7 +23,7 @@ public class MagicSelectPanel : MonoBehaviour
     {
         _exsistingMagic = _magicGroup.magicList.ToList();      //ToList는 새로 인스턴스화 하기 위해
         _magicController = PlayerManager.Instance.Player.GetCompo<PlayerMagicController>();
-        for(int i = 0; i < _magicSelection.Count; i++)
+        for (int i = 0; i < _magicSelection.Count; i++)
         {
             if (_magicSelection[i] == null) continue;
             _magicSelection[i].OnSelectIcon += OnSelectIcon;
@@ -46,7 +46,6 @@ public class MagicSelectPanel : MonoBehaviour
         {
             _magic[i] = random[i];
             _magicSelection[i].Initialize(_magic[i].magicData.icon, _magic[i].magicData.displayName, _magic[i].magicData.description, i);
-            Debug.Log(_magic[i]);
             _magicSelection[i].SetLevel(_magicController.GetMagicLevel(_magic[i]));
         }
 
@@ -70,7 +69,7 @@ public class MagicSelectPanel : MonoBehaviour
 
     private void OnSelectIcon(int index)
     {
-        _magicController.GetMagic(_magic[index]);
+        _magicController.AddMagic(_magic[index]);
 
         //최대 업그레이드 했으면 빼기
         if(_magicController.GetMagicLevel(_magic[index]) == 5)

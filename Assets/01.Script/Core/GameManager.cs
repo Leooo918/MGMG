@@ -37,10 +37,7 @@ public class GameManager : MonoSingleton<GameManager>
         _minute = totalSeconds / 60;
         _second = totalSeconds % 60;
 
-        string minutesStr = _minute.ToString("00");
-        string secondsStr = _second.ToString("00");
-
-        string display = $"{minutesStr}:{secondsStr}";
+        string display = string.Format("{0:00}:{1:00}", _minute, _second); 
 
         _displayTime = display;
         _timerTxt.text = display;

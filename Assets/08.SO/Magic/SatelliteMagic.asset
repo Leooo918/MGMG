@@ -27,7 +27,9 @@ MonoBehaviour:
       type: {class: SatelliteMagicData, ns: MGMG.Magic, asm: Assembly-CSharp}
       data:
         name: Satellite
-        description: 
+        displayName: "\uC704\uC131"
+        description: "\uD50C\uB808\uC774\uC5B4 \uC8FC\uBCC0\uC5D0 \uD68C\uC804\uD558\uB294
+          \uC704\uC131\uC744 \uC0DD\uC131\uD558\uC5EC \uD53C\uD574\uB97C \uC900\uB2E4."
         icon: {fileID: 21300000, guid: 300abdf8cbdd5c742a05b6506767fd64, type: 3}
         magicSchool: 0
         maxLevel: 5
@@ -35,11 +37,11 @@ MonoBehaviour:
         coolDownPerLevel: 0500000004000000030000000200000001000000
         satelliteCountPerLevel: 0300000003000000040000000400000005000000
         satelliteDamagePerLevel:
-        - 1.5
-        - 1.6
-        - 1.7
-        - 1.8
-        - 2
+        - 0.2
+        - 0.3
+        - 0.4
+        - 0.5
+        - 0.7
         satelliteDistance: 2
         satelliteRotateSpeed: 180
         satelliteSpeedUpValue: 4
