@@ -1,3 +1,4 @@
+using DG.Tweening;
 using MGMG.Entities.Component;
 using UnityEngine;
 
@@ -8,43 +9,27 @@ namespace MGMG.Combat
         [SerializeField] private EntityHealth _targetHealth;
         [SerializeField] private Transform _healthBar, _changerBar;
         [SerializeField] private float _changerDelay = 0.5f;
-        private float _lastChangeTime;
 
-        private float _targetHealthBar, _targetChangerBar;
+        private Sequence _hpDownSeq;
 
         private void Awake()
         {
             _targetHealth.OnHealthChangedEvent += HandleHealthChangedEvent;
-            _targetHealthBar = 1;
-            _targetChangerBar = 1;
         }
 
-        private void Update()
-        {
-            _healthBar.localScale = new Vector3(Mathf.Lerp(_healthBar.localScale.x, _targetHealthBar, Time.deltaTime * 8), 1, 1);
-            _changerBar.localScale = new Vector3(Mathf.Lerp(_changerBar.localScale.x, _targetChangerBar, Time.deltaTime * 8), 1, 1);
-            if (_lastChangeTime + _changerDelay < Time.time)
-            {
-                _targetChangerBar = _targetHealthBar;
-            }
-        }
 
         private void HandleHealthChangedEvent(int prev, int current, bool isChangeVisible)
         {
-            float value = 10000 * current / _targetHealth.MaxHealth;
-            float amount = value / 10000;
-            if (current < prev)
-            {
-                _targetHealthBar = amount;
-                _lastChangeTime = Time.time;
-            }
-            else
-            {
-                _targetHealthBar = amount;
-                _targetChangerBar = amount;
-                _healthBar.localScale = new Vector3(_targetHealthBar, 1, 1);
-                _changerBar.localScale = new Vector3(_targetChangerBar, 1, 1);
-            }
+            if (_hpDownSeq != null && _hpDownSeq.active) 
+                _hpDownSeq.Kill();
+
+            float value = (10000 * current / _targetHealth.MaxHealth) * 0.0001f;
+
+            _hpDownSeq = DOTween.Sequence();
+
+            _hpDownSeq.Append(_healthBar.DOScaleX(value, 0.2f))
+                .AppendInterval(_changerDelay)
+                .Append(_changerBar.DOScaleX(value, 0.1f));
         }
 
         private void OnDestroy()

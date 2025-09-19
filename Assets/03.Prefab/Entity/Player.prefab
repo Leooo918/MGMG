@@ -479,6 +479,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aca5843dfa0102c45ba3496daa546a3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _magicGroup: {fileID: 11400000, guid: 4624538bc3df4734f8239d9af32ca32a, type: 2}
   _debugMagic: {fileID: 0}
   _debugUpgradeIndex: 0
 --- !u!114 &980012177483492142

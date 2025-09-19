@@ -31,20 +31,20 @@ namespace MGMG.Entities
             _containMagic = new List<PlayerMagic>();
             _prevMagicUseTime = new List<float>();
             _owner = entity as Player;
-
         }
 
         public void AfterInit()
         {
-            GetMagic(_magicGroup.magicList.GetRandomInList());
+            AddMagic(_magicGroup.magicList.GetRandomInList());
         }
 
         public void Dispose()
         {
         }
-        public void GetMagic(MagicSO magic)
+
+        public void AddMagic(MagicSO magic)
         {
-            if(_magicDict.ContainsKey(magic))
+            if (_magicDict.ContainsKey(magic))
             {
                 UpgradeMagic(magic);
                 return;
@@ -57,6 +57,8 @@ namespace MGMG.Entities
             _containMagic.Add(playerMagic);
             _prevMagicUseTime.Add(Time.time);
         }
+
+        public List<MagicSO> GetContainMagic() => _magicDict.Keys.ToList();
 
         public int GetMagicLevel(MagicSO magic)
         {
@@ -87,7 +89,7 @@ namespace MGMG.Entities
 
             if (Keyboard.current.pKey.wasPressedThisFrame)
             {
-                GetMagic(_debugMagic);
+                AddMagic(_debugMagic);
             }
             if (Keyboard.current.oKey.wasPressedThisFrame)
             {
@@ -116,7 +118,7 @@ namespace MGMG.Entities
             _coolDownDict.Remove(key);
         }
 
-        
+
 
         #endregion
     }

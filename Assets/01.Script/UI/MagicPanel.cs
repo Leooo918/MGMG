@@ -13,10 +13,15 @@ public class MagicPanel : MonoBehaviour
 
     private void Start()
     {
+        _iconList = new List<IconUI>();
         _playerMagicController = PlayerManager.Instance.Player.GetCompo<PlayerMagicController>();
         _playerMagicController.OnGetMagic += OnGetMagic;
         _playerMagicController.OnUpgradeMagic += OnLevelUpMagic;
-        _iconList = new List<IconUI>();
+
+        foreach(var magicSO in _playerMagicController.GetContainMagic())
+        {
+            OnGetMagic(magicSO);
+        }
     }
 
     private void OnDisable()
