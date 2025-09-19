@@ -33,7 +33,7 @@ namespace MGMG.Core
             base.Awake();
             _canvas = GetComponent<Canvas>();
 
-            _xpSlider = _canvas.transform.Find("XPSlider").GetComponent<Slider>();
+            //_xpSlider = _canvas.transform.Find("XPSlider").GetComponent<Slider>();
         }
 
         private void Start()

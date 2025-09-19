@@ -1,4 +1,6 @@
 using MGMG.Entities;
+using MGMG.Magic;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -10,6 +12,10 @@ public class PlayerCardController : MonoBehaviour, IEntityComponent
 
     private List<Card> _cardList;
     private Entity _owner;
+
+    public event Action<CardSO> OnGetCard;
+    public event Action<CardSO> OnRemoveCard;
+    public event Action<int> OnRemoveCardIndex;
 
     private void Update()
     {
@@ -32,6 +38,7 @@ public class PlayerCardController : MonoBehaviour, IEntityComponent
 
     public void AddCard(CardSO cardSO)
     {
+        OnGetCard?.Invoke(cardSO);
         Card card = cardSO.card.GetInstance();
         card.Initialize(_owner, _cardList.Count);
         _cardList.Add(card);
@@ -39,6 +46,7 @@ public class PlayerCardController : MonoBehaviour, IEntityComponent
 
     public void RemoveCard(int index)
     {
+        OnRemoveCardIndex?.Invoke(index);
         _cardList[index].Release();
         _cardList.RemoveAt(index);
     }

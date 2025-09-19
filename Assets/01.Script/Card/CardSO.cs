@@ -9,9 +9,9 @@ public class CardSO : ScriptableObject
     [SerializeReference] public Card card;
 
     [Space]
-    [SerializeField] private string displayName;
-    [SerializeField] private string description;
-    [SerializeField] private Sprite Icon;
+    public string displayName;
+    public string description;
+    public Sprite icon;
 
     private void OnValidate()
     {
