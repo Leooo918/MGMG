@@ -28,7 +28,7 @@ MonoBehaviour:
       data:
         name: IcicleBullet
         description: 
-        icon: {fileID: 0}
+        icon: {fileID: 21300000, guid: 4184495d79c523148bd19006e6e88b2d, type: 3}
         magicSchool: 3
         maxLevel: 5
         coolDownPerLevel: 0500000004000000030000000200000001000000

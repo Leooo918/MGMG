@@ -28,7 +28,7 @@ MonoBehaviour:
       data:
         name: Lava
         description: 
-        icon: {fileID: 0}
+        icon: {fileID: 21300000, guid: 954cdace6e17b3d4890cbbbfe98ef2fe, type: 3}
         magicSchool: 2
         maxLevel: 5
         coolDownPerLevel: 0900000009000000090000000800000008000000

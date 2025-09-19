@@ -28,7 +28,7 @@ MonoBehaviour:
       data:
         name: CycloneBlade
         description: 
-        icon: {fileID: 0}
+        icon: {fileID: 21300000, guid: 0389074d1deba1c448d45812db40c0df, type: 3}
         magicSchool: 0
         maxLevel: 5
         coolDownPerLevel: 0600000005000000040000000300000002000000
