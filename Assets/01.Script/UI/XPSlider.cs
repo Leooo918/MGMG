@@ -29,7 +29,7 @@ public class XPSlider : MonoBehaviour
         {
             float remainingXp = targetValue - maxValue;
             _slider.maxValue *= 1.1f;
-            _levelText.SetText($"Lv. {PlayerManager.Instance.CurrentPlayerLevel}");
+            _levelText.SetText($"Lv. {PlayerManager.Instance.CurrentPlayerLevel + 1}");
 
             DOTween.To(() => _slider.value, x => _slider.value = x, maxValue, 0.3f)
                 .SetEase(Ease.OutCirc)

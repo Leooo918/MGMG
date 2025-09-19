@@ -15,10 +15,10 @@ public class IceLink : MonoBehaviour, IPoolable
     private Entity _owner;
     private float _lifeTime;
 
-    private float _tickDelay = 0.1f;
+    private float _tickDelay = 0.2f;
     private float _prevTick;
 
-    private Collider2D[] _collider;
+    private Collider2D[] _collider = new Collider2D[5];
 
     public GameObject GameObject => gameObject;
     public Enum PoolEnum => SkillPoolingType.IceLink;
@@ -35,17 +35,19 @@ public class IceLink : MonoBehaviour, IPoolable
 
     private void Update()
     {
-        if (_lifeTime > Time.time)
+        if (_lifeTime < Time.time)
         {
             PoolManager.Instance.Push(this);
             return;
         }
 
-        if (_prevTick + _tickDelay > Time.time)
+        if (_prevTick + _tickDelay < Time.time)
         {
             _prevTick = Time.time;
 
             ContactFilter2D contactFilter = new ContactFilter2D();
+            contactFilter.useLayerMask = true;
+            contactFilter.useTriggers = true;
             contactFilter.SetLayerMask(_layerMask);
 
             int count = Physics2D.OverlapCircle(transform.position, _range, contactFilter, _collider);

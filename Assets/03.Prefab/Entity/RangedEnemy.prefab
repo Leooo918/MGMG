@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8417756810408877246}
   - component: {fileID: 2679844955279012376}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: EntityHealth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6158209480362201729}
   - component: {fileID: 6474112334445580235}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: EntityStat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,7 +101,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6181893780761044546}
   - component: {fileID: 153924788516695748}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: EntityMover
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -148,7 +148,7 @@ GameObject:
   - component: {fileID: 9146075102504184875}
   - component: {fileID: 7065673675678554265}
   - component: {fileID: 6109222909024256088}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -211,9 +211,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 563777341
+  m_SortingLayer: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: 1572034964, guid: 9eb4dbd45ae879b4180ca9f497bf0aec, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -285,7 +285,7 @@ GameObject:
   - component: {fileID: 7863482879707415213}
   - component: {fileID: 2151334326009698102}
   - component: {fileID: 4504049858531111660}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RangedEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
