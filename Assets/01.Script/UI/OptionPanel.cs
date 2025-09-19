@@ -52,6 +52,7 @@ public class OptionPanel : MonoBehaviour
 
         _isOpen = false;
         _openCloseTween = RectTrm.DOAnchorPosY(_closePosition, _openCloseDuration).SetUpdate(true);
+        Time.timeScale = 1;
     }
 
     private void OnVolumeChnaged(float value)
@@ -71,7 +72,6 @@ public class OptionPanel : MonoBehaviour
 
     private void ResumeGame()
     {
-        Time.timeScale = 1;
         Close();
     }
 }
