@@ -25,6 +25,8 @@ namespace MGMG.Magic
             for (int i = 0; i < _lightningMagicData.damagePerLevel[CurrentLevel]; i++)
             {
                 ContactFilter2D filter = new ContactFilter2D();
+                filter.useLayerMask = true;
+                filter.useTriggers = true;
                 filter.SetLayerMask(_lightningMagicData.whatIsEnemy);
 
                 int count = Physics2D.OverlapCircle(_owner.transform.position, _lightningMagicData.range, filter, _collider);

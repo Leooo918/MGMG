@@ -16,6 +16,8 @@ namespace MGMG.Magic
             //PoolManager.Instance.Pop(EffectPoolingType.Pulse);
 
             ContactFilter2D contactFilter = new ContactFilter2D();
+            contactFilter.useLayerMask = true;
+            contactFilter.useTriggers = true;
             contactFilter.SetLayerMask(_pulseMagicData._whatIsEnemy);
 
             int count = Physics2D.OverlapCircle(_owner.transform.position, _pulseMagicData._rangePerLevel[CurrentLevel], contactFilter, _collider);

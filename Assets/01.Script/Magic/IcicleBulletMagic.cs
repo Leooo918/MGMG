@@ -12,7 +12,10 @@ namespace MGMG.Magic
         public override void OnUseSkill()
         {
             ContactFilter2D contactFilter = new ContactFilter2D();
+            contactFilter.useLayerMask = true;
+            contactFilter.useTriggers = true;
             contactFilter.SetLayerMask(_icicleBulletData.whatIsEnemy);
+
             int count = Physics2D.OverlapCircle(_owner.transform.position, _icicleBulletData.detectRange, contactFilter, _collider);
             int damage = Mathf.RoundToInt(_attackStat.Value * _icicleBulletData.damagePerLevel[CurrentLevel]);
 

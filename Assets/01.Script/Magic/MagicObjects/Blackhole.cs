@@ -48,6 +48,8 @@ public class Blackhole : MonoBehaviour, IPoolable
     private void DetectEnemy(Action<Enemy> action)
     {
         ContactFilter2D contactFilter = new ContactFilter2D();
+        contactFilter.useLayerMask = true;
+        contactFilter.useTriggers = true;
         contactFilter.SetLayerMask(_whatIsEnemy);
         int count = Physics2D.OverlapCircle(transform.position, _gravity, contactFilter, _collider);
         for (int i = 0; i < count; i++)

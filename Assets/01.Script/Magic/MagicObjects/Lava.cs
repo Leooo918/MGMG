@@ -42,6 +42,8 @@ public class Lava : MonoBehaviour, IPoolable
             _prevTick = Time.time;
 
             ContactFilter2D filter = new ContactFilter2D();
+            filter.useLayerMask = true;
+            filter.useTriggers = true;
             filter.SetLayerMask(_whatIsEnemy);
             int count = Physics2D.OverlapCircle(transform.position, _range, filter, _collider);
 

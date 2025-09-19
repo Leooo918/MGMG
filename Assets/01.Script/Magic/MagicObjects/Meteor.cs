@@ -30,6 +30,8 @@ public class Meteor : MonoBehaviour, IPoolable
         {
             //이펙트 재생
             ContactFilter2D filter = new ContactFilter2D();
+            filter.useLayerMask = true;
+            filter.useTriggers = true;
             filter.SetLayerMask(_whatIsEnemy);
 
             int count = Physics2D.OverlapCircle(transform.position, _detectRange, filter, _collider);

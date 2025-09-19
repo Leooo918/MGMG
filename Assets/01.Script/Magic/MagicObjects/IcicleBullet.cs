@@ -45,6 +45,8 @@ public class IcicleBullet : MonoBehaviour, IPoolable
         {
             //데미지 넣고
             ContactFilter2D filter = new ContactFilter2D();
+            filter.useLayerMask = true;
+            filter.useTriggers = true;
             filter.SetLayerMask(_whatIsEnemy);
             int count = Physics2D.OverlapCircle(transform.position, _explosionRange, filter, _collider);
             enemy.GetCompo<EntityHealth>().ApplyDamage(_owner.GetCompo<EntityStat>(), _damage);
