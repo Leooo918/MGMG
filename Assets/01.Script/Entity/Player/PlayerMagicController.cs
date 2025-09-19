@@ -10,6 +10,7 @@ namespace MGMG.Entities
 {
     public class PlayerMagicController : MonoBehaviour, IEntityComponent
     {
+        [SerializeField] private MagicGroupSO _magicGroup;
         private Dictionary<string, float> _coolDownDict;
 
         private Dictionary<MagicSO, PlayerMagic> _magicDict;
@@ -30,6 +31,8 @@ namespace MGMG.Entities
             _containMagic = new List<PlayerMagic>();
             _prevMagicUseTime = new List<float>();
             _owner = entity as Player;
+
+            GetMagic(_magicGroup.magicList.GetRandomInList());
         }
 
         public void GetMagic(MagicSO magic)
