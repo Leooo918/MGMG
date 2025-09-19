@@ -54,6 +54,13 @@ public class GameManager : MonoSingleton<GameManager>
 
     public void GameOver()
     {
-        _gameOver.DOFade(1, 0.2f);
+        _gameOver.DOFade(1f, 0.2f)
+         .SetEase(Ease.OutSine)
+         .SetUpdate(true)
+         .OnComplete(() =>
+         {
+             // 필요시 게임오버 상태 전환 처리
+             Debug.Log("GameOver Fade Complete");
+         });
     }
 }

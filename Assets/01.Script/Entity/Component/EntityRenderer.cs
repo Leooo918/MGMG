@@ -9,21 +9,14 @@ namespace MGMG.Entities.Component
 
         private Entity _entity;
         public Animator Animator { get; private set; }
-        public List<SpriteRenderer> SpriteRendererList { get; private set; } = new List<SpriteRenderer>();
-        private Material _material;
 
         
         public void Initialize(Entity entity)
         {
             _entity = entity;
             Animator = GetComponent<Animator>();
-            GetComponentsInChildren(SpriteRendererList);
         }
 
-        private void Start()
-        {
-            _material = SpriteRendererList[0].material;
-        }
 
                                                                                                                                                                                                                                                                                                                                                                                                                                    
         public void SetParam(AnimParamSO param, bool value) => Animator.SetBool(param.hashValue, value);
