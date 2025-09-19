@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <PoolingType>k__BackingField: 0
-  _text: {fileID: 0}
+  _text: {fileID: 1599305144787346388}
 --- !u!23 &5592718030559340182
 MeshRenderer:
   m_ObjectHideFlags: 0

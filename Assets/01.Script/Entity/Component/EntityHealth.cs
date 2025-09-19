@@ -1,3 +1,4 @@
+using MGMG.Core.ObjectPooling;
 using MGMG.StatSystem;
 using System;
 using UnityEngine;
@@ -63,6 +64,12 @@ namespace MGMG.Entities.Component
                     isCritical = true;
                     damage = Mathf.CeilToInt(damage * (statCompo.StatDictionary["CriticalDamage"].Value / 100));
                 }
+            }
+
+            if (isTextVisible)
+            {
+                DamageText damageText = PoolManager.Instance.Pop(UIPoolingType.DamageText) as DamageText;
+                damageText.Setting(damage, isCritical, transform.position);
             }
 
             int prev = Health;

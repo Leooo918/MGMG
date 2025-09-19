@@ -135,7 +135,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abffdf211c2083c42bee3c09d6324271, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 5
 --- !u!1 &6476783197851505709
 GameObject:
   m_ObjectHideFlags: 0
@@ -333,7 +332,7 @@ MonoBehaviour:
   _damageSO: {fileID: 11400000, guid: 066e1e8ac736f0c4aae04c15e2ef3f79, type: 2}
   _attackCooldownSO: {fileID: 11400000, guid: 1549c3f67b279454ca2554ef67f8c38f, type: 2}
   _poolingType: 1
-  _bulletSpeed: 10
+  _bulletSpeed: 5
 --- !u!61 &2151334326009698102
 BoxCollider2D:
   m_ObjectHideFlags: 0

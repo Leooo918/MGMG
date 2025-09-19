@@ -4,6 +4,7 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 namespace MGMG.Core
 {
@@ -228,6 +229,15 @@ namespace MGMG.Core
                 .DOAnchorPosY(_escPanelCloseYPos, 0.3f)
                 .SetEase(Ease.OutCirc)
                 .SetUpdate(true);
+        }
+
+        public void LoadTitle()
+        {
+            SceneManager.LoadScene("Title");
+        }
+        public void LoadInGame()
+        {
+            SceneManager.LoadScene("InGame");
         }
     }
 }

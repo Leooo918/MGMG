@@ -61,9 +61,6 @@ namespace MGMG.Combat.Projectile
             }
 
             if (_isEnable == false) return;
-
-            _visualTrm.Rotate(Vector3.forward * _rotate);
-
             Vector3 movement = transform.up * (Time.fixedDeltaTime * _speed);
             if (_caster.CheckCollision(out RaycastHit2D[] hits, _whatIsTarget, movement))
             {
