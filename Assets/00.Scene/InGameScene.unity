@@ -1049,7 +1049,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -49.999878, y: 0}
+  m_AnchoredPosition: {x: -50, y: 0}
   m_SizeDelta: {x: 100, y: 40}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &347456347
@@ -146799,6 +146799,26 @@ PrefabInstance:
       propertyPath: m_LocalScale.x
       value: 1.2
       objectReference: {fileID: 0}
+    - target: {fileID: 2896381299239431495, guid: 6b136af9fb804964fbf607b93f3a195f, type: 3}
+      propertyPath: _curve.m_Curve.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2896381299239431495, guid: 6b136af9fb804964fbf607b93f3a195f, type: 3}
+      propertyPath: _curve.m_Curve.Array.data[1].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2896381299239431495, guid: 6b136af9fb804964fbf607b93f3a195f, type: 3}
+      propertyPath: _curve.m_Curve.Array.data[1].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2896381299239431495, guid: 6b136af9fb804964fbf607b93f3a195f, type: 3}
+      propertyPath: _curve.m_Curve.Array.data[0].inSlope
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2896381299239431495, guid: 6b136af9fb804964fbf607b93f3a195f, type: 3}
+      propertyPath: _curve.m_Curve.Array.data[0].outSlope
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3073252789771192657, guid: 6b136af9fb804964fbf607b93f3a195f, type: 3}
       propertyPath: m_SortingLayer
       value: 3
@@ -146918,7 +146938,7 @@ PrefabInstance:
     - target: {fileID: 8661002299990356552, guid: 6b136af9fb804964fbf607b93f3a195f, type: 3}
       propertyPath: _debugMagic
       value: 
-      objectReference: {fileID: 11400000, guid: 3c59adda4f14ad146a42a04111e7411c, type: 2}
+      objectReference: {fileID: 11400000, guid: b5065620a3460404da25ca0d84da8592, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:

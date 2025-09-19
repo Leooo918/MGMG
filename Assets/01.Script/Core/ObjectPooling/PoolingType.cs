@@ -29,5 +29,6 @@ namespace MGMG.Core.ObjectPooling
     {
         LightingEffect,
         Pulse,
+        ExplosionEffect
     }
 }

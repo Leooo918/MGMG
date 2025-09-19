@@ -1,3 +1,4 @@
+using MGMG.Core.ObjectPooling;
 using MGMG.Enemies;
 using MGMG.Entities.Component;
 using UnityEngine;
@@ -13,7 +14,9 @@ namespace MGMG.Magic
         public override void OnUseSkill()
         {
             //ÀÌÆåÆ® Àç»ý
-            //PoolManager.Instance.Pop(EffectPoolingType.Pulse);
+            SkillEffect effect = (SkillEffect)PoolManager.Instance.Pop(EffectPoolingType.Pulse);
+            effect.transform.position = _owner.transform.position;
+            effect.PlayEffect();
 
             ContactFilter2D contactFilter = new ContactFilter2D();
             contactFilter.useLayerMask = true;
@@ -29,7 +32,6 @@ namespace MGMG.Magic
                     Vector2 force = (enemy.transform.position - _owner.transform.position).normalized * _pulseMagicData._knockBackPowerPerLevel[CurrentLevel];
                     int damage = Mathf.RoundToInt(_attackStat.Value * _pulseMagicData._damagePerLevel[CurrentLevel]);
 
-                    Debug.Log(force);
                     enemy.GetCompo<EntityMover>().AddForceToEntity(force, 0.3f);
                     enemy.GetCompo<EntityHealth>().ApplyDamage(_stat, damage);
                 }

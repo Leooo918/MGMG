@@ -11,7 +11,6 @@ namespace MGMG.Entities
     public class Player : Entity
     {
         public EntityStateListSO playerFSM;
-
         [field: SerializeField] public PlayerInputSO PlayerInput { get; private set; }
 
         private StateMachine _stateMachine;
