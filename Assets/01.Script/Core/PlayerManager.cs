@@ -43,6 +43,7 @@ namespace MGMG.Core
         public void AddExp(int exp)
         {
             CurrentExp += exp;
+            UIManager.Instance.XpApply(exp);
             if (CurrentExp > MaxExp)
             {
                 CurrentExp -= MaxExp;
