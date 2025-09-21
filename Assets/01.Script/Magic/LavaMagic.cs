@@ -1,6 +1,4 @@
 using MGMG.Core.ObjectPooling;
-using MGMG.Enemies;
-using TMPro.EditorUtilities;
 using UnityEngine;
 
 namespace MGMG.Magic

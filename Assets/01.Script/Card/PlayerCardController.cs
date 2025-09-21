@@ -19,15 +19,15 @@ public class PlayerCardController : MonoBehaviour, IEntityComponent
 
     private void Update()
     {
-        if(Keyboard.current.mKey.wasPressedThisFrame)
-        {
-            AddCard(_debugCard);
-        }
-        if(Keyboard.current.nKey.wasPressedThisFrame)
-        {
-            if (_cardList.Count > _removeIndex)
-                RemoveCard(_removeIndex);
-        }
+        //if(Keyboard.current.mKey.wasPressedThisFrame)
+        //{
+        //    AddCard(_debugCard);
+        //}
+        //if(Keyboard.current.nKey.wasPressedThisFrame)
+        //{
+        //    if (_cardList.Count > _removeIndex)
+        //        RemoveCard(_removeIndex);
+        //}
     }
 
     public void Initialize(Entity entity)

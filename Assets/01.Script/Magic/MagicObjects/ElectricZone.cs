@@ -35,13 +35,13 @@ public class ElectricZone : MonoBehaviour, IPoolable
 
     private void Update()
     {
-        if (_lifeTime > Time.time)
+        if (_lifeTime < Time.time)
         {
             PoolManager.Instance.Push(this);
             return;
         }
 
-        if (_prevTick + _tickDelay > Time.time)
+        if (_prevTick + _tickDelay < Time.time)
         {
             _prevTick = Time.time;
 

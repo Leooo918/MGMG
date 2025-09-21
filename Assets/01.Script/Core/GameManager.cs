@@ -57,6 +57,8 @@ public class GameManager : MonoSingleton<GameManager>
     {
         _killCountTxt.text = $"죽인 적 : {PlayerManager.Instance.EnemyKillCount}";
         _gameOverTimeTxt.text = $"버틴 시간 : {_displayTime}";
+        _gameOver.interactable = true;
+        _gameOver.blocksRaycasts = true;
         _gameOver.DOFade(1f, 0.2f)
          .SetEase(Ease.OutSine)
          .SetUpdate(true)

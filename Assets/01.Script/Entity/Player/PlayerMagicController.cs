@@ -87,14 +87,14 @@ namespace MGMG.Entities
                 }
             }
 
-            if (Keyboard.current.pKey.wasPressedThisFrame)
-            {
-                AddMagic(_debugMagic);
-            }
-            if (Keyboard.current.oKey.wasPressedThisFrame)
-            {
-                //UpgradeMagic(_debugUpgradeIndex);
-            }
+            //if (Keyboard.current.pKey.wasPressedThisFrame)
+            //{
+            //    AddMagic(_debugMagic);
+            //}
+            //if (Keyboard.current.oKey.wasPressedThisFrame)
+            //{
+            //    //UpgradeMagic(_debugUpgradeIndex);
+            //}
         }
 
         #region CoolDownFuntion
